@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app/app.component';
 import { SummaryInfoComponent } from './summary-info/summary-info.component';
+import { SystemStatusService } from "./services/system-status.service";
 
 const appRoutes: Routes = [
   { path: 'info', component: SummaryInfoComponent },
@@ -24,7 +25,9 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+      SystemStatusService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

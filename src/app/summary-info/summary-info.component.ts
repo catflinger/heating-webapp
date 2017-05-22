@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { SystemStatus } from "../model/system-status";
+import { SystemStatusService } from "../services/system-status.service";
 
 @Component({
-  selector: 'app-summary-info',
-  templateUrl: './summary-info.component.html',
-  styleUrls: ['./summary-info.component.css']
+    selector: 'app-summary-info',
+    templateUrl: './summary-info.component.html',
+    styleUrls: ['./summary-info.component.css']
 })
 export class SummaryInfoComponent implements OnInit {
+    private status: SystemStatus;
 
-  constructor() { }
+    constructor(private statusService: SystemStatusService) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.statusService.getStatus().subscribe((status) => {
+            this.status = status;
+        });
+    }
 
 }

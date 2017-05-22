@@ -1,4 +1,5 @@
 import { TestBed, async } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
 
@@ -8,6 +9,9 @@ describe('AppComponent', () => {
             declarations: [
                 AppComponent
             ],
+            imports: [
+                RouterTestingModule.withRoutes([])
+            ]
         }).compileComponents();
     }));
 
@@ -27,6 +31,7 @@ describe('AppComponent', () => {
         let compiled;
 
         beforeEach(() => {
+
             const fixture = TestBed.createComponent(AppComponent);
             fixture.detectChanges();
             compiled = fixture.debugElement.nativeElement;
@@ -38,6 +43,6 @@ describe('AppComponent', () => {
 
         it('should contain 3 menu items', async(() => {
             expect(compiled.querySelector('#mainMenu').childElementCount).toEqual(3);
-        }));   
-     });
+        }));
+    });
 });

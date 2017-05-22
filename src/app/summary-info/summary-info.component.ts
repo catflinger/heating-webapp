@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SystemStatus } from "../model/system-status";
+import { SystemStatus } from "../common/system-status";
 import { SystemStatusService } from "../services/system-status.service";
 
 @Component({

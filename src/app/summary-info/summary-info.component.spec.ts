@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 import { SummaryInfoComponent } from './summary-info.component';
 import { SystemStatusService } from "../services/system-status.service";
+import { OnOffPipe } from "../common/on-off.pipe";
 
 describe('SummaryInfoComponent', () => {
     let component: SummaryInfoComponent;
@@ -12,7 +13,9 @@ describe('SummaryInfoComponent', () => {
             imports: [
                 HttpModule
             ],
-            declarations: [SummaryInfoComponent],
+            declarations: [
+                SummaryInfoComponent,
+                OnOffPipe],
             providers: [
                 SystemStatusService
             ]

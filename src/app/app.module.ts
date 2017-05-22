@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { SummaryInfoComponent } from './summary-info/summary-info.component';
 import { SystemStatusService } from "./services/system-status.service";
+import { OnOffPipe } from './common/on-off.pipe';
 
 const appRoutes: Routes = [
   { path: 'info', component: SummaryInfoComponent },
@@ -17,7 +18,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    SummaryInfoComponent
+    SummaryInfoComponent,
+    OnOffPipe
   ],
   imports: [
     BrowserModule,

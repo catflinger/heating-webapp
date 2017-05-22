@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { HttpModule, Http, BaseRequestOptions, XHRBackend } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 
-import { SystemStatus } from "../model/system-status";
+import { SystemStatus } from "../common/system-status";
 import { SystemStatusService } from './system-status.service';
 
 describe('SystemStatusService', () => {

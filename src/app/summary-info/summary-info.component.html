@@ -1,14 +1,14 @@
 <table class="table">
     <tr>
         <td>Heating</td>
-        <td>{{status.control.heating}}</td>
+        <td>{{status.control.heating | onOff }}</td>
     </tr>
     <tr>
         <td>Water</td>
-        <td>{{status.control.water}}</td>
+        <td>{{status.control.water | onOff }}</td>
     </tr>
     <tr>
         <td>Hot water temperature</td>
-        <td>{{status.env.hwTemp}}</td>
+        <td>{{status.env.hwTemp }}</td>
     </tr>
 </table>

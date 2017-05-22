@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from "rxjs";
 
-import { SystemStatus } from "../model/system-status";
+import { SystemStatus } from "../common/system-status";
 
 @Injectable()
 export class SystemStatusService {

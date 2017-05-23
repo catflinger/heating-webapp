@@ -8,9 +8,12 @@ import { Program } from "../common/program";
 })
 export class ProgramChartComponent implements OnInit {
     private chartWidth: number = 800;
-    private chartHeight: number = 40;
+    private chartHeight: number = 80;
     private slotWidth: number;
     private slotHeight = 40;
+    private hourWidth: number;
+
+    private hours: any[] = [];
 
     @Input() private program: Program;
 
@@ -19,6 +22,11 @@ export class ProgramChartComponent implements OnInit {
 
     ngOnInit() {
          this.slotWidth = this.chartWidth / this.program.slotsPerDay;
+         this.hourWidth = this.chartWidth / 24;
+
+         for (let i = 0; i < 24; i++) {
+            this.hours.push(i.toString());
+         }
     }
 
 }

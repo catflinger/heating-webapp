@@ -27,22 +27,22 @@ describe('AppComponent', () => {
         expect(app.title).toEqual('Heating Controller');
     }));
 
-    describe("main menu", () => {
-        let compiled;
+    // describe("main menu", () => {
+    //     let compiled;
 
-        beforeEach(() => {
+    //     beforeEach(() => {
 
-            const fixture = TestBed.createComponent(AppComponent);
-            fixture.detectChanges();
-            compiled = fixture.debugElement.nativeElement;
-        });
+    //         const fixture = TestBed.createComponent(AppComponent);
+    //         fixture.detectChanges();
+    //         compiled = fixture.debugElement.nativeElement;
+    //     });
 
-        it('should be present', async(() => {
-            expect(compiled.querySelector('#mainMenu')).not.toBeUndefined;
-        }));
+    //     it('should be present', async(() => {
+    //         expect(compiled.querySelector('#mainMenu')).not.toBeUndefined;
+    //     }));
 
-        it('should contain 3 menu items', async(() => {
-            expect(compiled.querySelector('#mainMenu').childElementCount).toEqual(3);
-        }));
-    });
+    //     it('should contain 3 menu items', async(() => {
+    //         expect(compiled.querySelector('#mainMenu').childElementCount).toEqual(3);
+    //     }));
+    // });
 });

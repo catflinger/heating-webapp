@@ -23,9 +23,18 @@ describe('SystemStatusService', () => {
 
     it("should return summary info", inject([SystemStatusService], (service: SystemStatusService) => {
         service.getStatus().subscribe((data) => {
-            expect(data).toBeDefined;
-            expect(data.control.water).toEqual(true);
-            expect(data.control.heating).toEqual(false);
+            const status: SystemStatus = data;
+
+            expect(status).toBeDefined;
+            expect(status.control.water).toEqual(true);
+            expect(status.control.heating).toEqual(false);
+
+            expect(status.env.hwTemp).toEqual(45);
+
+            expect(status.program.slotsPerDay).toEqual(10);
+            expect(status.program.slots[0]).toEqual(true);
+            expect(status.program.slots[3]).toEqual(false);
+            expect(status.program.slots[9]).toEqual(true);
         });
     }));
 });

@@ -18,6 +18,21 @@ export class SystemStatusService {
             control: {
                 water: true,
                 heating: false
+            },
+            program: {
+                slotsPerDay: 10,
+                slots: [
+                    true,
+                    true,
+                    true,
+                    false,
+                    false,
+                    false,
+                    false,
+                    true,
+                    true,
+                    true
+                ]
             }
         }));
     }

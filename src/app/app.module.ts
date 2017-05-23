@@ -8,6 +8,7 @@ import { AppComponent } from './app/app.component';
 import { SummaryInfoComponent } from './summary-info/summary-info.component';
 import { SystemStatusService } from "./services/system-status.service";
 import { OnOffPipe } from './common/on-off.pipe';
+import { ProgramChartComponent } from './program-chart/program-chart.component';
 
 const appRoutes: Routes = [
   { path: 'info', component: SummaryInfoComponent },
@@ -19,7 +20,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     SummaryInfoComponent,
-    OnOffPipe
+    OnOffPipe,
+    ProgramChartComponent
   ],
   imports: [
     BrowserModule,

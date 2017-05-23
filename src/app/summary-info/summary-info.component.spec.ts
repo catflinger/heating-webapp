@@ -3,7 +3,7 @@ import { HttpModule } from '@angular/http';
 import { SummaryInfoComponent } from './summary-info.component';
 import { SystemStatusService } from "../services/system-status.service";
 import { OnOffPipe } from "../common/on-off.pipe";
-
+import { ProgramChartComponent } from "../program-chart/program-chart.component";
 describe('SummaryInfoComponent', () => {
     let component: SummaryInfoComponent;
     let fixture: ComponentFixture<SummaryInfoComponent>;
@@ -15,7 +15,9 @@ describe('SummaryInfoComponent', () => {
             ],
             declarations: [
                 SummaryInfoComponent,
-                OnOffPipe],
+                OnOffPipe,
+                ProgramChartComponent
+                ],
             providers: [
                 SystemStatusService
             ]

@@ -1,14 +1,45 @@
-<table class="table">
-    <tr>
-        <td>Heating</td>
-        <td>{{status.control.heating | onOff }}</td>
-    </tr>
-    <tr>
-        <td>Water</td>
-        <td>{{status.control.water | onOff }}</td>
-    </tr>
-    <tr>
-        <td>Hot water temperature</td>
-        <td>{{status.env.hwTemp }}</td>
-    </tr>
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>Heating</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">{{status.control.heating | onOff }}</div>
+        <div class="col-sm-3">until 2.30pm</div>
+        <div class="col-sm-6"><button type="button" class="btn btn-outline-primary">Bump up</button> <button type="button" class="btn btn-outline-primary">Bump down</button></div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h3>Hot water</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">{{status.control.water | onOff }}</div>
+        <div class="col-sm-3">auto</div>
+        <div class="col-sm-6"><button type="button" class="btn btn-outline-primary">Bath Boost</button></div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h3>Environment</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">Hot water temperature</div>
+        <div class="col-sm-3">{{status.env.hwTemp }}</div>
+        <div class="col-sm-6"></div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h3>Program</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <app-program-chart [program]="status.program"></app-program-chart>
+        </div>
+    </div>
+</div>

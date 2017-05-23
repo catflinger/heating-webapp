@@ -1,0 +1,9 @@
+<svg class="chart" [ngStyle]="{ height: chartHeight, width: chartWidth }">
+    <svg:rect 
+        [attr.x]="i * slotWidth" 
+        [attr.width]="slotWidth" 
+        [attr.height]="slotHeight" 
+        [attr.fill]="slot ? 'red' : 'grey'" 
+        stroke="black" 
+        *ngFor="let slot of program.slots; let i = index;" />
+</svg>

@@ -14,9 +14,13 @@ export class SummaryInfoComponent implements OnInit {
     constructor(@Inject(INJECTABLES.SystemStatusService) private statusService: ISystemStatusService) { }
 
     ngOnInit() {
-        this.statusService.getStatus().subscribe((status) => {
-            this.status = status;
-        });
+        this.statusService.getStatus()
+            .subscribe((status) => {
+                this.status = status;
+            },
+            (error) => {
+                console.log("Error: " + error);
+            });
     }
 
     heatButton(): void {

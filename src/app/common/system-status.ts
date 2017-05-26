@@ -8,6 +8,7 @@ export class SystemStatus {
     public program: Program;
 
     constructor(src: any) {
+
         if (src) {
             if (src.control) {
                 this.control = new ControlStatus(src.control);
@@ -17,17 +18,18 @@ export class SystemStatus {
 
                     if (src.program) {
                         this.program = new Program(src.program);
+
                     } else {
                         throw new Error("invalid data: program missing")
                     }
                 } else {
-                    throw new Error("invalid data: control state missing")
+                    throw new Error("invalid data: environment state missing")
                 }
             } else {
                 throw new Error("invalid data: control state missing")
             }
         } else {
-            throw new Error("no data provided for system state")
+            throw new Error("no data for SystemStatus")
         }
     }
 }

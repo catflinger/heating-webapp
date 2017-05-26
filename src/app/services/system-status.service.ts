@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from "rxjs";
 
 import { SystemStatus } from "../common/system-status";
@@ -12,31 +12,10 @@ export class SystemStatusService implements ISystemStatusService {
     }
 
     public getStatus(): Observable<SystemStatus> {
-        return Observable.of<SystemStatus>(new SystemStatus({
-            env: {
-                hwTemp: 45
-            },
-            control: {
-                water: true,
-                heating: false
-            },
-            program: {
-                slotsPerDay: 10,
-                hwmin: 40,
-                hwmax: 50,
-                slots: [
-                    false,
-                    false,
-                    false,
-                    false,
-                    true,
-                    false,
-                    false,
-                    true,
-                    false,
-                    false
-                ]
-            }
-        }));
+        return this.http.get("http://localhost:3000/api/status")
+            .map((res: Response) => {
+                return new SystemStatus(res.json());
+            })
+           .catch((error: any) => Observable.throw(error || 'Server error'));
     }
 }

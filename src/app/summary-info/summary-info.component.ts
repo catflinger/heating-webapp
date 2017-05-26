@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { SystemStatus } from "../common/system-status";
-import { SystemStatusService } from "../services/system-status.service";
+import { ISystemStatusService } from "../common/system-status.interface";
+import { INJECTABLES } from "../common/injectables";
 
 @Component({
     selector: 'app-summary-info',
@@ -10,12 +11,17 @@ import { SystemStatusService } from "../services/system-status.service";
 export class SummaryInfoComponent implements OnInit {
     private status: SystemStatus;
 
-    constructor(private statusService: SystemStatusService) { }
+    constructor(@Inject(INJECTABLES.SystemStatusService) private statusService: ISystemStatusService) { }
 
     ngOnInit() {
         this.statusService.getStatus().subscribe((status) => {
             this.status = status;
         });
+    }
+
+    heatButton(): void {
+        // send a message to the server to do something
+        
     }
 
 }

@@ -27,11 +27,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-3">Hot water temperature</div>
-        <div class="col-sm-3">{{status.env.hwTemp }}</div>
-        <div class="col-sm-6"></div>
+        <div class="col-sm-6">Hot water temperature</div>
+        <div class="col-sm-6">{{status.env.hwTemp }}</div>
     </div>
-
+    <div class="row">
+        <div class="col-sm-6">Hot water min</div>
+        <div class="col-sm-6">{{status.program.hwmin }}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">Hot water max</div>
+        <div class="col-sm-6">{{status.program.hwmax }}</div>
+    </div>
     <div class="row">
         <div class="col">
             <h3>Program</h3>

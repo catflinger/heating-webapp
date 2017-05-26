@@ -6,9 +6,9 @@ import { SystemStatus } from "../common/system-status";
 import { ISystemStatusService } from "../common/system-status.interface";
 
 @Injectable()
-export class SystemStatusService implements ISystemStatusService {
+export class MockSystemStatusService implements ISystemStatusService {
 
-    constructor(private http: Http) {
+    constructor() {
     }
 
     public getStatus(): Observable<SystemStatus> {

@@ -4,6 +4,9 @@ import { SummaryInfoComponent } from './summary-info.component';
 import { SystemStatusService } from "../services/system-status.service";
 import { OnOffPipe } from "../common/on-off.pipe";
 import { ProgramChartComponent } from "../program-chart/program-chart.component";
+import { INJECTABLES } from "../common/injectables";
+import { MockSystemStatusService } from "../services/mock-system-status.service";
+
 describe('SummaryInfoComponent', () => {
     let component: SummaryInfoComponent;
     let fixture: ComponentFixture<SummaryInfoComponent>;
@@ -19,7 +22,7 @@ describe('SummaryInfoComponent', () => {
                 ProgramChartComponent
                 ],
             providers: [
-                SystemStatusService
+                { provide: INJECTABLES.SystemStatusService, useClass: MockSystemStatusService }
             ]
         })
             .compileComponents();

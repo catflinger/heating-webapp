@@ -1,3 +1,4 @@
+<div class="alert alert-success" *ngIf="successMessage">{{successMessage}}</div>
 <div class="container" *ngIf="status">
     <div class="row">
         <div class="col">
@@ -7,7 +8,9 @@
     <div class="row">
         <div class="col-sm-3">{{status.control.heating | onOff }}</div>
         <div class="col-sm-3">until 2.30pm</div>
-        <div class="col-sm-6"><button type="button" class="btn btn-outline-primary">Bump up</button> <button type="button" class="btn btn-outline-primary">Bump down</button></div>
+        <div class="col-sm-6">
+            <button type="button" class="btn btn-outline-primary" (click)="heatButton(true)">Bump up</button> 
+            <button type="button" class="btn btn-outline-primary" (click)="heatButton(false)">Bump down</button></div>
     </div>
 
     <div class="row">

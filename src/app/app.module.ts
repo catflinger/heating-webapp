@@ -11,6 +11,7 @@ import { MockSystemStatusService } from "./services/mock-system-status.service";
 import { OnOffPipe } from './common/on-off.pipe';
 import { ProgramChartComponent } from './program-chart/program-chart.component';
 import { INJECTABLES } from "./common/injectables";
+import { MockControlService } from "./services/mock-control.service";
 
 const appRoutes: Routes = [
   { path: 'info', component: SummaryInfoComponent },
@@ -32,8 +33,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-      // { provide: INJECTABLES.SystemStatusService, useClass: MockSystemStatusService}
-      { provide: INJECTABLES.SystemStatusService, useClass: SystemStatusService}
+      { provide: INJECTABLES.ControlService, useClass: MockControlService },
+      { provide: INJECTABLES.SystemStatusService, useClass: SystemStatusService }
   ],
   bootstrap: [AppComponent]
 })

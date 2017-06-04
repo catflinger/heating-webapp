@@ -6,6 +6,7 @@ import { OnOffPipe } from "../common/on-off.pipe";
 import { ProgramChartComponent } from "../program-chart/program-chart.component";
 import { INJECTABLES } from "../common/injectables";
 import { MockSystemStatusService } from "../services/mock-system-status.service";
+import { MockControlService } from "../services/mock-control.service";
 
 describe('SummaryInfoComponent', () => {
     let component: SummaryInfoComponent;
@@ -22,7 +23,8 @@ describe('SummaryInfoComponent', () => {
                 ProgramChartComponent
                 ],
             providers: [
-                { provide: INJECTABLES.SystemStatusService, useClass: MockSystemStatusService }
+                { provide: INJECTABLES.SystemStatusService, useClass: MockSystemStatusService },
+                { provide: INJECTABLES.ControlService, useClass: MockControlService }
             ]
         })
             .compileComponents();

@@ -18,19 +18,14 @@ export class SummaryInfoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.statusService.getStatus()
-            .subscribe(
-                (status) => {
-                    this.status = status;
-                },
-                (error) => {
-                    console.log("Error: " + error);
-                    this.successMessage = "Failed to get the system status info: " + error;
-                }
-            );
+        this.refresh();
     }
 
-    heatButton(state: boolean): void {
+    clearMessage(): void {
+        this.successMessage = null;
+    }
+
+    setOverride(state: boolean): void {
         this.successMessage = null;
 
         // send a message to the server to do something
@@ -39,6 +34,7 @@ export class SummaryInfoComponent implements OnInit {
         .subscribe(
             (result) => {
                 this.successMessage = result ? "Heating boost set." : "Failed to set the heating override";
+                this.refresh();
             },
             (error) => {
                 console.log("Error: " + error);
@@ -47,4 +43,35 @@ export class SummaryInfoComponent implements OnInit {
         );
     }
 
+    clearOverride(): void {
+        this.successMessage = null;
+
+        // send a message to the server to do something
+
+        this.controlService.clearOverride()
+        .subscribe(
+            (result) => {
+                this.successMessage = result ? "Heating overrides cleared." : "Failed to clear the heating override";
+                this.refresh();
+            },
+            (error) => {
+                console.log("Error: " + error);
+                this.successMessage = "Failed to clear the heating override: " + error;
+            }
+        );        
+    }
+
+    refresh(): void {
+        this.statusService.getStatus()
+            .subscribe(
+                (status) => {
+                    this.status = status;
+                    console.log(JSON.stringify(this.status));
+                },
+                (error) => {
+                    console.log("Error: " + error);
+                    this.successMessage = "Failed to get the system status info: " + error;
+                }
+            );
+    }
 }

@@ -12,6 +12,7 @@ import { OnOffPipe } from './common/on-off.pipe';
 import { ProgramChartComponent } from './program-chart/program-chart.component';
 import { INJECTABLES } from "./common/injectables";
 import { MockControlService } from "./services/mock-control.service";
+import { ControlService } from "./services/control.service";
 
 const appRoutes: Routes = [
   { path: 'info', component: SummaryInfoComponent },
@@ -33,7 +34,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-      { provide: INJECTABLES.ControlService, useClass: MockControlService },
+      // { provide: INJECTABLES.ControlService, useClass: MockControlService },
+      { provide: INJECTABLES.ControlService, useClass: ControlService },
       { provide: INJECTABLES.SystemStatusService, useClass: SystemStatusService }
   ],
   bootstrap: [AppComponent]

@@ -10,4 +10,5 @@ export interface ISystemStatusService {
 
 export interface IControlService {
     setOverride(state: boolean): Observable<boolean>;
+    clearOverride(): Observable<boolean>;
 }

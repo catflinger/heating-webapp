@@ -15,9 +15,9 @@ import { MockControlService } from "./services/mock-control.service";
 import { ControlService } from "./services/control.service";
 
 const appRoutes: Routes = [
-  { path: 'info', component: SummaryInfoComponent },
   { path: '',   redirectTo: '/info', pathMatch: 'full' },
-  { path: '**', redirectTo: '/info' } // or PageNotFound component
+  { path: 'info', component: SummaryInfoComponent },
+  { path: '**', redirectTo: '/info' }
 ];
 
 @NgModule({
@@ -31,7 +31,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes, {useHash: true})
   ],
   providers: [
       // { provide: INJECTABLES.ControlService, useClass: MockControlService },

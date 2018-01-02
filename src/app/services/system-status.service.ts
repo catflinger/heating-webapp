@@ -12,8 +12,9 @@ export class SystemStatusService implements ISystemStatusService {
     }
 
     public getStatus(): Observable<SystemStatus> {
-        return this.http.get("http://localhost:3000/api/status")
+        return this.http.get("http://cherrypi:3000/api/status")
             .map((res: Response) => {
+                console.log(res.json());
                 return new SystemStatus(res.json());
             })
            .catch((error: any) => Observable.throw(error || 'Server error'));

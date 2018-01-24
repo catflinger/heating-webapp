@@ -10,7 +10,7 @@ export class ControlService implements IControlService {
 
     public setOverride(state: boolean): Observable<boolean> {
         return this.http
-            .post("http://cherrypi:3000/api/control/override/set", {
+            .post("/api/control/override/set", {
                 state: true,
                 duration: 5,
             })
@@ -20,7 +20,7 @@ export class ControlService implements IControlService {
 
     public clearOverride(): Observable<boolean> {
         return this.http
-            .post("http://cherrrypi:3000/api/control/override/clear", null)
+            .post("/api/control/override/clear", null)
             .map(result => true)
             .catch(error => Observable.from<boolean>([false]));
     }

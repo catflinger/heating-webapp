@@ -5,6 +5,9 @@ import { IControlService } from "../common/system-status.interface";
 
 @Injectable()
 export class MockControlService implements IControlService {
+    clearOverride(): Observable<boolean> {
+        throw new Error("Method not implemented.");
+    }
 
     constructor() { }
 

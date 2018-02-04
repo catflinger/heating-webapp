@@ -14,6 +14,7 @@ export class MockSystemStatusService implements ISystemStatusService {
     public getStatus(): Observable<SystemStatus> {
         return Observable.of<SystemStatus>(new SystemStatus({
             env: {
+                sensors: [],
                 hwTemp: 45
             },
             control: {

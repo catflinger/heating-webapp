@@ -34,9 +34,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, {useHash: true})
   ],
   providers: [
-      // { provide: INJECTABLES.ControlService, useClass: MockControlService },
-      { provide: INJECTABLES.ControlService, useClass: ControlService },
-      { provide: INJECTABLES.SystemStatusService, useClass: SystemStatusService }
+      { provide: INJECTABLES.ControlService, useClass: MockControlService },
+      // { provide: INJECTABLES.ControlService, useClass: ControlService },
+      { provide: INJECTABLES.SystemStatusService, useClass: MockSystemStatusService }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,16 +1,29 @@
-<div class=container>
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" routerLink="home">Drumtochty Heating</a>
 
-    <!-- MAIN MENU -->
-    <!--<div class="row">
-        <div class="col">
-            <div id="mainMenu" class="d-inline-block">
-                <button class="btn">Home</button>
-                <button class="btn">Program</button>
-                <button class="btn">Settings</button>
-            </div>
-        </div>
-    </div>-->
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="programs">Programs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="info">Info</a>
+            </li>
 
+        </ul>
+
+    </div>
+</nav>
+
+
+<div class=container-fluid>
     <!-- CONTENT -->
     <router-outlet></router-outlet>
 </div>

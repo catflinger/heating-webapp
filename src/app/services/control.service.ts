@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from "rxjs";
-import { IControlService } from "../common/system-status.interface";
+import { IControlService } from "../common/injectables";
 
 @Injectable()
 export class ControlService implements IControlService {
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
     public setOverride(state: boolean): Observable<boolean> {
         return this.http
@@ -27,3 +27,5 @@ export class ControlService implements IControlService {
             .catch(error => Observable.from<boolean>([false]));
     }
 }
+
+

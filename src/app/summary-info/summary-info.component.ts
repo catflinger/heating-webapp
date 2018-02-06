@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { SystemStatus } from "../common/system-status";
-import { IControlService, ISystemStatusService } from "../common/system-status.interface";
+import { IControlService, ISystemStatusService } from "../common/injectables";
 import { INJECTABLES } from "../common/injectables";
 
 @Component({

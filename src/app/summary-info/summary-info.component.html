@@ -8,9 +8,7 @@
     <div class="row">
         <div class="col-sm-3">{{status.control.heating | onOff }}</div>
         <div class="col-sm-3"><span *ngIf="status.override">overide {{status.override.state}}</span></div>
-        <div class="col-sm-6">
-            <button type="button" class="btn btn-outline-primary" (click)="setOverride(true)">Bump up</button> 
-            <button type="button" class="btn btn-outline-primary" (click)="clearOverride()">Bump down</button></div>
+        <div class="col-sm-6"></div>
     </div>
 
     <div class="row">
@@ -21,7 +19,7 @@
     <div class="row">
         <div class="col-sm-3">{{status.control.water | onOff }}</div>
         <div class="col-sm-3">auto</div>
-        <div class="col-sm-6"><button type="button" class="btn btn-outline-primary">Bath Boost</button></div>
+        <div class="col-sm-6"></div>
     </div>
 
     <div class="row">

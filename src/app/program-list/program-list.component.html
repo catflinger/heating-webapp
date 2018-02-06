@@ -1,0 +1,10 @@
+<div class="container-fluid">
+    <h3>Stored Programs</h3>
+    <table class="table" *ngIf="programs">
+        <tbody>
+            <tr *ngFor="let p of programs">
+                <td>{{p.name}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

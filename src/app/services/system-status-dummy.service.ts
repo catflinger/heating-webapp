@@ -44,7 +44,6 @@ export class SystemStatusDummyService implements ISystemStatusService {
             "hwmax": 50, 
             "hwmin": 40, 
             "slots": [false, false, false, false, false, false, false, false, false, false], 
-            "slotsPerDay": 10 
         } 
     }
 }

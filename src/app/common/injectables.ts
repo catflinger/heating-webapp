@@ -24,4 +24,6 @@ export interface IControlService {
 export interface IProgramService {
     
     list(): Observable<Program[]>;
+    
+    getProgram(id: string): Observable<Program>;
 }

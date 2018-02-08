@@ -18,6 +18,20 @@ export class ProgramDummyService implements IProgramService {
         return Observable.of(results);
     }
 
+    getProgram(id: string): Observable<Program> {
+        let result: Observable<Program>;
+        let programData: any = this.data.programs.find( (p: any) => p.id === id );
+
+        if (programData) {
+            result = Observable.of(new Program(programData));
+        } else {
+            throw new Error("Method not implemented.");
+        }
+
+        return result;
+    }
+
+
     private data: any = {
         "programs": [
             {"hwmax":50,"hwmin":40,"id":"b5fdc7cb-fe7a-4e99-874d-ac0f480b393e","name":"default","slots":[false,false,false,false,false,false,false,false,false,false]},

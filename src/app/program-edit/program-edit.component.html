@@ -1,0 +1,5 @@
+<form [formGroup]="programForm" (ngSubmit)="doLogin($event)">
+        <input formControlName="name" type="text" placeholder="descriptive name for this program">
+        <input formControlName="hwTemp" type="number" placeholder="45">
+      <button type="submit">Save</button>
+    </form>

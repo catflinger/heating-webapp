@@ -1,4 +1,7 @@
 <div class="alert alert-success clearfix" *ngIf="successMessage">{{successMessage}} <button type="button" class="btn btn-primary pull-right" (click)="clearMessage()">OK</button></div>
+
+<app-page-title [title]="'System Status'"></app-page-title>
+
 <div class="container" *ngIf="status">
     <div class="row">
         <div class="col">

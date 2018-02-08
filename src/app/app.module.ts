@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -16,13 +16,17 @@ import { ControlDummyService } from "./services/control-dummy.service";
 import { ProgramListComponent } from './program-list/program-list.component';
 import { HomeComponent } from './home/home.component';
 import { ProgramDummyService } from './services/program-dummy.service';
+import { ProgramInfoComponent } from './program-info/program-info.component';
+import { PageTitleComponent } from './page-title/page-title.component';
+import { ProgramEditComponent } from './program-edit/program-edit.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/info', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'info', component: SummaryInfoComponent },
     { path: 'programs', component: ProgramListComponent },
-    { path: '**', redirectTo: '/info' }
+    { path: 'program-edit/:id', component: ProgramEditComponent },
+    { path: '**', redirectTo: '/home' }
 ];
 
 @NgModule({
@@ -32,11 +36,14 @@ const appRoutes: Routes = [
         OnOffPipe,
         ProgramChartComponent,
         ProgramListComponent,
-        HomeComponent
+        HomeComponent,
+        ProgramInfoComponent,
+        PageTitleComponent,
+        ProgramEditComponent
     ],
     imports: [
         BrowserModule,
-        FormsModule,
+        ReactiveFormsModule,
         HttpClientModule,
         RouterModule.forRoot(appRoutes, { useHash: true })
     ],

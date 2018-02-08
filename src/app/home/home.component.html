@@ -1,13 +1,7 @@
-<div class="alert alert-success clearfix" *ngIf="successMessage">{{successMessage}} <button type="button" class="btn btn-primary pull-right" (click)="clearMessage()">OK</button></div>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <h3>Heating</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <button type="button" class="btn btn-outline-primary" (click)="setOverride(true)">Bump up</button> 
-            <button type="button" class="btn btn-outline-primary" (click)="clearOverride()">Bump down</button></div>
-    </div>
-</div>
+
+<app-page-title [title]="'Heating Home'"></app-page-title>
+
+<button type="button" class="btn btn-outline-primary btn-block" (click)="setOverride(true)">I'm cold, put the heating on!</button> 
+<button type="button" class="btn btn-outline-primary btn-block" (click)="clearOverride()">Its too damn hot in here</button>
+
+<div class="alert alert-success" *ngIf="successMessage">{{successMessage}} <button type="button" class="btn btn-primary pull-right" (click)="clearMessage()">OK</button></div>

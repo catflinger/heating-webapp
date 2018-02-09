@@ -1,5 +1,38 @@
-<form [formGroup]="programForm" (ngSubmit)="doLogin($event)">
-        <input formControlName="name" type="text" placeholder="descriptive name for this program">
-        <input formControlName="hwTemp" type="number" placeholder="45">
-      <button type="submit">Save</button>
-    </form>
+<div class="row custom-row">
+    <div class="col-sm-5 custom-container jumbotron">
+
+        <form class="form-horizontal" [formGroup]="form" (ngSubmit)="onFormSubmit()" *ngIf="form">
+            <fieldset>
+                <legend>Edit Program</legend>
+
+                <div class="form-group">
+                    <label for="inputName">Name</label>
+                    <input type="text" id="inputName" placeholder="descriptive name" formControlName="name">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputHwmax">Hot water maximum</label>
+                    <input type="number" id="inputHwmax" placeholder="45" formControlName="hwmax">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputHwmin">Hot water minimum</label>
+                    <input type="number" id="inputHwmin" placeholder="40" formControlName="hwmin">
+                </div>
+
+                <div class="form-group" formArrayName="slots">
+                    <input type="checkbox" class="checkbox" [formControlName]="i"  *ngFor="let s of slotArray.controls; index as i"/>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+                    <button type="reset" class="btn btn-default">Cancel</button>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+
+    <p *ngIf="form">Form value {{ form.value | json }} </p>
+    <p *ngIf="form"> Form status {{ form.status | json}} </p>
+</div>

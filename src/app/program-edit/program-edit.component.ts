@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 
-import { IProgramService, INJECTABLES } from '../common/injectables';
+import { IProgramService, INJECTABLES, hoursPerDay, slotsPerHour } from '../common/injectables';
 import { Program } from '../common/program';
 
 @Component({
@@ -32,18 +32,24 @@ export class ProgramEditComponent implements OnInit {
                         name: new FormControl(p.name,  Validators.required),
                         hwmax: new FormControl(p.hwmax,  Validators.required),
                         hwmin: new FormControl(p.hwmin,  Validators.required),
-                        slots: new FormArray([])
+                        hours: new FormArray([])
                     });
 
-                    p.slots.forEach((slotValue) => {
-                        this.slotArray.push(new FormControl(slotValue));
-                    });
+                    for (let hour: number = 0; hour < hoursPerDay; hour++){
+                        let slotArray = new FormArray([]);
+                        this.hourArray.push(slotArray);
+
+                        for (let i = 0; i < slotsPerHour; i++) {
+                            slotArray.push(
+                                new FormControl(p.slots[hour * slotsPerHour + i]));
+                        }
+                    }
                 }
             );
         });
     }
 
-    get slotArray(): FormArray { return this.form.get('slots') as FormArray}
+    get hourArray(): FormArray { return this.form.get('hours') as FormArray}
 
     ngOnDestroy() {
         if (this.sub) {

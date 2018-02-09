@@ -1,38 +1,58 @@
-<div class="row custom-row">
-    <div class="col-sm-5 custom-container jumbotron">
+<app-page-title [title]="'Edit program'"></app-page-title>
 
-        <form class="form-horizontal" [formGroup]="form" (ngSubmit)="onFormSubmit()" *ngIf="form">
-            <fieldset>
-                <legend>Edit Program</legend>
+<div class="row custom-row mx-auto">
 
-                <div class="form-group">
-                    <label for="inputName">Name</label>
-                    <input type="text" id="inputName" placeholder="descriptive name" formControlName="name">
+    <div class="col-sm-3"></div>
+
+    <div class="col-sm-6">
+        <div class="container">
+            <form class="form" [formGroup]="form" (ngSubmit)="onFormSubmit()" *ngIf="form">
+                <fieldset>
+                    <div class="form-group row">
+                        <label for="inputName" class="col-sm-4 col-form-label">Name</label>
+                        <input type="text" id="inputName" placeholder="descriptive name" formControlName="name">
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputHwmax" class="col-sm-4 col-form-label">HW max</label>
+                        <input type="number" id="inputHwmax" placeholder="45" formControlName="hwmax">
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputHwmin" class="col-sm-4 col-form-label">HW min</label>
+                        <input type="number" id="inputHwmin" placeholder="40" formControlName="hwmin">
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Program</label>
+                        <div class="col-sm-8 nopadding">
+                            <div class="container form-group nopadding" formArrayName="hours">
+                                <div class="form-group row nopadding" *ngFor="let h of hourArray.controls; index as i" [formArrayName]="i">
+                                    <div class="col-sm-2 text-left nopadding">{{i}}</div>
+                                    <div class="text-left">
+                                        <input 
+                                            type="checkbox" 
+                                            class="checkbox" 
+                                            [formControlName]="j" 
+                                            *ngFor="let s of hourArray.controls[i].controls; index as j"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col">
+                        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="inputHwmax">Hot water maximum</label>
-                    <input type="number" id="inputHwmax" placeholder="45" formControlName="hwmax">
-                </div>
+                </fieldset>
+            </form>
+        </div>
 
-                <div class="form-group">
-                    <label for="inputHwmin">Hot water minimum</label>
-                    <input type="number" id="inputHwmin" placeholder="40" formControlName="hwmin">
-                </div>
-
-                <div class="form-group" formArrayName="slots">
-                    <input type="checkbox" class="checkbox" [formControlName]="i"  *ngFor="let s of slotArray.controls; index as i"/>
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
-                    <button type="reset" class="btn btn-default">Cancel</button>
-                </div>
-
-            </fieldset>
-        </form>
+        <div class="col-sm-3"></div>
     </div>
-
-    <p *ngIf="form">Form value {{ form.value | json }} </p>
-    <p *ngIf="form"> Form status {{ form.status | json}} </p>
 </div>

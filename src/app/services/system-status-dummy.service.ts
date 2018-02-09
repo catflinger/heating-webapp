@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 
 import { SystemStatus } from "../common/system-status";
-import { ISystemStatusService } from "../common/injectables";
+import { ISystemStatusService, slotsPerDay } from "../common/injectables";
 
 @Injectable()
 export class SystemStatusDummyService implements ISystemStatusService {
@@ -43,7 +43,7 @@ export class SystemStatusDummyService implements ISystemStatusService {
         "program": { 
             "hwmax": 50, 
             "hwmin": 40, 
-            "slots": [false, false, false, false, false, false, false, false, false, false], 
+            "slots": new Array(slotsPerDay).fill(false), 
         } 
     }
 }

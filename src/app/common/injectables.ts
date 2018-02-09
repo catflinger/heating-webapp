@@ -3,7 +3,9 @@ import { Observable } from "rxjs";
 import { SystemStatus } from "./system-status";
 import { Program } from "./program";
 
-export let slotsPerDay: number = 10;
+export const slotsPerHour: number = 12;
+export const hoursPerDay: number = 24;
+export const slotsPerDay: number = slotsPerHour * 24;
 
 export let INJECTABLES = {
     SystemStatusService: new InjectionToken("SystemStatusService"),

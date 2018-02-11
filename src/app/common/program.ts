@@ -26,8 +26,14 @@ export class Program {
                 throw new Error("invalid data: slotsPerDay mismatch")
             }
         } else {
-            throw new Error("invalid data: program missing")
-
+            // set default values
+            this.hwmax = 50;
+            this.hwmin = 40;
+            this.name = "new program";
+            this.id = null;
+            for(let n:number = 0; n < slotsPerDay; n++) {
+                this.slots.push(false);
+            }
         }
     }
 

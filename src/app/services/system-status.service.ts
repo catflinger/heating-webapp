@@ -16,7 +16,6 @@ export class SystemStatusService implements ISystemStatusService {
     public getStatus(): Observable<SystemStatus> {
         return this.http.get("/api/status")
             .map((res: Response) => {
-                console.log(res);
                 return new SystemStatus(res);
             })
            .catch((error: any) => Observable.throw(error || 'Server error'));

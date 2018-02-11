@@ -13,10 +13,8 @@ export class ProgramListComponent implements OnInit {
     private programs: Program[] = null;
 
     constructor(private router: Router,  @Inject(INJECTABLES.ProgramService) private programServcie: IProgramService) {
-        programServcie.list().subscribe( (programs: Program[]) => {
-            this.programs = programs;
-            });
-     }
+        this.listPrograms();
+    }
 
     ngOnInit() {
     }
@@ -25,12 +23,27 @@ export class ProgramListComponent implements OnInit {
 
     }
 
+    private listPrograms() {
+        this.programServcie.list().subscribe( (programs: Program[]) => {
+            this.programs = programs;
+        });
+        
+    }
+
     private btnEdit(program: Program) {
         this.router.navigateByUrl(`/program-edit/${program.id}`);
     }
 
+    private btnAdd() {
+        this.router.navigateByUrl("/program-edit/0");
+    }
+
     private btnDelete(program: Program) {
-        
+        this.programServcie.deleteProgram(program.id)
+        .subscribe( () => {
+            this.programs = undefined;
+            this.listPrograms();
+        });
     }
 
 }

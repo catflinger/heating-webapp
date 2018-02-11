@@ -3,7 +3,7 @@ import { Observable } from "rxjs";
 import { SystemStatus } from "./system-status";
 import { Program } from "./program";
 
-export const slotsPerHour: number = 12;
+export const slotsPerHour: number = 6;
 export const hoursPerDay: number = 24;
 export const slotsPerDay: number = slotsPerHour * 24;
 
@@ -26,6 +26,7 @@ export interface IControlService {
 export interface IProgramService {
     
     list(): Observable<Program[]>;
-    
     getProgram(id: string): Observable<Program>;
+    saveProgram(program: Program): Observable<any>;
+    deleteProgram(id: string): Observable<any>;
 }

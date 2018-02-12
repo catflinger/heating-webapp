@@ -1,7 +1,9 @@
 
     <ul class="list-unstyled">
-        <li>Name {{program.name}}</li>
-        <li>Id {{program.id}}</li>
+        <li>Hot water maximum {{program.hwmax}}</li>
+        <li>Hot water minimum {{program.hwmin}}</li>
+        <li>Central heating maximum {{program.chmax}}</li>
     </ul>
+    <app-program-chart [program]="program"></app-program-chart>
  
 

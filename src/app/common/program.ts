@@ -8,6 +8,7 @@ export class Program {
     public slots: boolean[] = [];
     public hwmax: number;
     public hwmin: number;
+    public chmax: number;
     public id: string;
     public name: string;
 
@@ -15,6 +16,7 @@ export class Program {
         if (src) {
             this.hwmin = Validate.isNumber(src.hwmin, "hwmin");
             this.hwmax = Validate.isNumber(src.hwmax, "hwmax");
+            this.chmax = Validate.isNumber(src.chmax, "chmax");
             this.id = src.id;
             this.name = src.name;
 
@@ -29,6 +31,7 @@ export class Program {
             // set default values
             this.hwmax = 50;
             this.hwmin = 40;
+            this.chmax = 18;
             this.name = "new program";
             this.id = null;
             for(let n:number = 0; n < slotsPerDay; n++) {

@@ -1,25 +1,4 @@
-<svg class="chart" [ngStyle]="{ height: chartHeight, width: chartWidth }">
-    <svg:rect 
-        [attr.x]="i * slotWidth" 
-        [attr.width]="slotWidth" 
-        [attr.height]="slotHeight" 
-        [attr.stroke]="slot ? 'red' : 'grey'" 
-        [attr.fill]="slot ? 'red' : 'grey'" 
-        *ngFor="let slot of program.slots; let i = index;" />
-
-    <svg:rect 
-        [attr.x] = "(i + 1) * hourWidth"
-        [attr.y] = "slotHeight * 2 / 3" 
-        [attr.width] = "1" 
-        [attr.height] = "slotHeight/ 3" 
-        fill="black" 
-        stroke="black" 
-        *ngFor="let hour of hours; let i = index;" />
-
-    <svg:text 
-        [attr.x] = "i * hourWidth"
-        [attr.y] = "slotHeight + 30" 
-        fill="black" 
-        stroke="black" 
-        *ngFor="let hour of hours; let i = index;">{{hour}}</svg:text>
-</svg>
+<div class="pie-wrap">
+    <canvas [id]="canvas.id" class="pie-canvas" [width]="canvas.width" [height]="canvas.height">
+    </canvas>  
+</div>

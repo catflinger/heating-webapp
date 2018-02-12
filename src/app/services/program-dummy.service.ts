@@ -49,6 +49,7 @@ export class ProgramDummyService implements IProgramService {
 
         data.hwmax = program.hwmax;
         data.hwmin = program.hwmin;
+        data.chmax = program.chmax;
         data.id = program.id;
         data.name = program.name;
         data.slots = program.slots.slice(0);
@@ -70,9 +71,9 @@ export class ProgramDummyService implements IProgramService {
 
     private data: any = {
         "programs": [
-            {"hwmax":50,"hwmin":40,"id":"b5fdc7cb-fe7a-4e99-874d-ac0f480b393e","name":"default","slots": new Array(slotsPerDay).fill(true)},
-            {"hwmax":50,"hwmin":40,"id":"cf1f515c-7915-49d1-be4b-6c245ed6b255","name":"some name or other","slots":new Array(slotsPerDay).fill(false)},
-            {"hwmax":50,"hwmin":40,"id":"f7e85ee8-9e3b-4c58-9bd8-5484b915de91","name":"some name or other","slots":new Array(slotsPerDay).fill(true)},
+            {"hwmax":48,"hwmin":39, "chmax": 18, "id":"b5fdc7cb-fe7a-4e99-874d-ac0f480b393e","name":"default","slots": new Array(slotsPerDay).fill(false)},
+            {"hwmax":50,"hwmin":40, "chmax": 19,"id":"cf1f515c-7915-49d1-be4b-6c245ed6b255","name":"some name or other","slots":new Array(slotsPerDay).fill(false)},
+            {"hwmax":50,"hwmin":42, "chmax": 17,"id":"f7e85ee8-9e3b-4c58-9bd8-5484b915de91","name":"some name or other","slots":new Array(slotsPerDay).fill(false)},
         ]
     };
 }

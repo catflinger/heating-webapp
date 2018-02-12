@@ -30,10 +30,8 @@ export class SummaryInfoComponent implements OnInit {
             .subscribe(
                 (status) => {
                     this.status = status;
-                    console.log(JSON.stringify(this.status));
                 },
                 (error) => {
-                    console.log("Error: " + error);
                     this.successMessage = "Failed to get the system status info: " + error;
                 }
             );

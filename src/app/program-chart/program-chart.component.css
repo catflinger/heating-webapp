@@ -1,3 +1,6 @@
-.chart {
-    background-color: lightgray;
+.pie-wrap {
+    position: relative;
+}
+.pie-canvas {
+    position: relative;
 }

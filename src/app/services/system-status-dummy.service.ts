@@ -43,6 +43,7 @@ export class SystemStatusDummyService implements ISystemStatusService {
         "program": { 
             "hwmax": 50, 
             "hwmin": 40, 
+            "chmax": 19, 
             "slots": new Array(slotsPerDay).fill(false), 
         } 
     }

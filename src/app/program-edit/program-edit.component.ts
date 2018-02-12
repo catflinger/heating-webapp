@@ -83,7 +83,6 @@ export class ProgramEditComponent implements OnInit {
             this.hourArray.controls.forEach( (ctls: FormArray) => {
                 ctls.controls.forEach( (ctl: FormControl) => {
                     this.program.slots[n] = ctl.value;
-                    console.log(`saving ${ctl.value} to slot ${n}`);
                     n++;
                 });
             });

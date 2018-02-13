@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { IProgramService } from '../common/injectables';
+import { IProgramService, ProgramMode } from '../common/injectables';
 import { Program } from '../common/program';
+import { ProgramManager } from '../common/program-manager';
 
 @Injectable()
 export class ProgramService implements IProgramService {
@@ -11,20 +12,28 @@ export class ProgramService implements IProgramService {
     constructor(private http: HttpClient) {
     }
 
-    getProgram(id: string): Observable<Program> {
+    public activateProgram(id: string, mode: ProgramMode): Observable<any> {
+        return this.http.post("/api/activate-program", { id, mode });
+    }
+    
+    public getProgram(id: string): Observable<Program> {
         return this.http.get(`/api/program/${id}`)
         .map( (data: any): Program => new Program(data));
     }
     
-    public list(): Observable<Program[]> {
+    public getProgramManager(): Observable<ProgramManager> {
         
         return this.http.get("/api/program")
 
-        .map( (data: any): Program[] => {
-            const result: Program[] = [];
+        .map( (data: any): ProgramManager => {
+            const result: ProgramManager = new ProgramManager();
 
+            result.weekdayId = data.weekday;
+            result.saturdayId = data.saturday;
+            result.sundayId = data.sunday;
+    
             data.programs.array.forEach( (element: any) => {
-                result.push(new Program(element));
+                result.programs.push(new Program(element));
             });
 
             return result;

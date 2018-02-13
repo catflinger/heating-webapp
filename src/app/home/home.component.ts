@@ -14,6 +14,10 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
     }
 
+    clearMessage(): void {
+        this.successMessage = null;
+    }
+
     setOverride(state: boolean): void {
         this.successMessage = null;
 

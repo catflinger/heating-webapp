@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { INJECTABLES, IProgramService } from '../common/injectables';
+import { INJECTABLES, IProgramService, ProgramMode } from '../common/injectables';
 import { Program } from '../common/program';
 import { Router } from '@angular/router';
+import { ProgramManager } from '../common/program-manager';
 
 @Component({
     selector: 'app-program-list',
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 })
 export class ProgramListComponent implements OnInit {
 
-    private programs: Program[] = null;
+    private programManager: ProgramManager = null;
+    private programModes = ProgramMode;
 
     constructor(private router: Router,  @Inject(INJECTABLES.ProgramService) private programServcie: IProgramService) {
         this.listPrograms();
@@ -19,13 +21,17 @@ export class ProgramListComponent implements OnInit {
     ngOnInit() {
     }
 
-    private btnActivate(program: Program) {
-
+    private btnActivate(program: Program, mode: ProgramMode) {
+        this.programServcie.activateProgram(program.id, mode)
+        .subscribe( () => {
+            this.programManager = undefined;
+            this.listPrograms();
+        });
     }
 
     private listPrograms() {
-        this.programServcie.list().subscribe( (programs: Program[]) => {
-            this.programs = programs;
+        this.programServcie.getProgramManager().subscribe( (programManager: ProgramManager) => {
+            this.programManager = programManager;
         });
         
     }
@@ -41,7 +47,7 @@ export class ProgramListComponent implements OnInit {
     private btnDelete(program: Program) {
         this.programServcie.deleteProgram(program.id)
         .subscribe( () => {
-            this.programs = undefined;
+            this.programManager = undefined;
             this.listPrograms();
         });
     }

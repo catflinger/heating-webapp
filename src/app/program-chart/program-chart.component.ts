@@ -27,10 +27,12 @@ export class ProgramChartComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         const el: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById(this.canvas.id);
         const ctx: CanvasRenderingContext2D = el.getContext("2d");
+        ctx.translate(this.canvas.cx, this.canvas.cy);
+        ctx.rotate(-Math.PI/2);
 
         ctx.fillStyle = "#AAAAAA";
         ctx.beginPath();
-        ctx.arc(this.canvas.cx, this.canvas.cy, this.canvas.cx, 0, 2 * Math.PI, false);
+        ctx.arc(0, 0, this.canvas.radius, 0, 2 * Math.PI, false);
         ctx.fill();
 
         this.program.slots.forEach( (val, idx) => {
@@ -44,10 +46,10 @@ export class ProgramChartComponent implements OnInit, AfterViewInit {
 
         ctx.fillStyle = "#AA0000";
         ctx.beginPath();
-        ctx.moveTo(this.canvas.cx, this.canvas.cy);
+        ctx.moveTo(0, 0);
         ctx.arc(
-            this.canvas.cx, 
-            this.canvas.cy, 
+            0, 
+            0, 
             this.canvas.radius, 
             slotNumber * this.slotAngle, 
             (slotNumber + 1) * this.slotAngle, 

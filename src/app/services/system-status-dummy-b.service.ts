@@ -1,21 +1,41 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 
 import { SystemStatus } from "../common/system-status";
 import { ISystemStatusService, slotsPerDay } from "../common/injectables";
 
 @Injectable()
-export class SystemStatusDummyService implements ISystemStatusService {
+export class SystemStatusDummyServiceB implements ISystemStatusService {
+
+    //private systemStatus: SystemStatus;
+    private bSubject: BehaviorSubject<SystemStatus>;
 
     constructor(private http: HttpClient) {
+        //this.systemStatus = new SystemStatus(this.data)
+        this.refresh();
     }
 
     public getStatus(): Observable<SystemStatus> {
-        return Observable.of(new SystemStatus(this.data));
+        return this.bSubject.asObservable();
     }
 
-public refresh() {}
+    public refresh(): void {
+        if (!this.bSubject) {
+            this.bSubject = <BehaviorSubject<SystemStatus>>new BehaviorSubject(null);
+        }
+
+        console.log("getting data");
+        this.data.items[3].snapshot.activeProgram.hwmax++;
+
+        Observable.of(this.data)
+        .map((data) => new SystemStatus(data))
+        .subscribe((s) => {
+            //this.systemStatus = s;
+            this.bSubject.next(s);
+        });
+
+    }
 
     private data: any = {
         items: [

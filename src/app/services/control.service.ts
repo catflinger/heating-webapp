@@ -10,19 +10,16 @@ export class ControlService implements IControlService {
 
     constructor(private http: HttpClient) { }
 
-    public setOverride(state: boolean): Observable<boolean> {
+    public setOverride(duration: number): Observable<boolean> {
         return this.http
-            .post("/api/control/override/set", {
-                state: true,
-                duration: 5,
-            })
+            .put("/api/control/override", { duration })
             .map(result => true)
             .catch(error => Observable.from<boolean>([false]));
     }
 
     public clearOverride(): Observable<boolean> {
         return this.http
-            .post("/api/control/override/clear", null)
+            .delete("/api/control/override")
             .map(result => true)
             .catch(error => Observable.from<boolean>([false]));
     }

@@ -3,45 +3,47 @@ import { EnvStatus } from "./env-status";
 import { Program } from "./program";
 import { OverrideStatus } from "./override-status";
 import { DeviceStatus } from "./device-status";
+import { ControllerStatus } from "./controllerStatus";
 
 export class SystemStatus {
     public control: ControlStatus;
     public device: DeviceStatus;
     public env: EnvStatus;
-    public program: Program;
-    public override: OverrideStatus;
+    public controller: ControllerStatus;
 
     constructor(src: any) {
 
         if (src) {
-            if (src.control) {
-                this.control = new ControlStatus(src.control);
+            if (Array.isArray(src.items)) {
+                const controlData: any = (src.items as any[]).find((item) => item.id === "control");
+                if (controlData && controlData.snapshot) {
+                    this.control = new ControlStatus(controlData.snapshot);
 
-                if (src.env) {
-                    this.env = new EnvStatus(src.env);
+                    const envData: any = (src.items as any[]).find((item) => item.id === "env");
+                    if (envData && envData.snapshot) {
+                        this.env = new EnvStatus(envData.snapshot);
 
-                    if (src.device) {
-                        this.device = new DeviceStatus(src.device);
-    
-                        if (src.program) {
-                            this.program = new Program(src.program);
+                        const deviceData: any = (src.items as any[]).find((item) => item.id === "device");
+                        if (deviceData && deviceData.snapshot) {
+                            this.device = new DeviceStatus(deviceData.snapshot);
 
-                            if (src.override) {
-                                this.override = new OverrideStatus(src.override);
+                            const controllerData: any = (src.items as any[]).find((item) => item.id === "controller");
+                            if (controllerData && controllerData.snapshot) {
+                                this.controller = new ControllerStatus(controllerData.snapshot);
                             } else {
-                                this.override = null;
+                                throw new Error("invalid data: controller missing")
                             }
                         } else {
-                            throw new Error("invalid data: program missing")
+                            throw new Error("invalid data: device state missing")
                         }
                     } else {
-                        throw new Error("invalid data: device state missing")
+                        throw new Error("invalid data: environment state missing")
                     }
                 } else {
-                    throw new Error("invalid data: environment state missing")
+                    throw new Error("invalid data: control state missing")
                 }
             } else {
-                throw new Error("invalid data: control state missing")
+                throw new Error("invalid data: items array missing")
             }
         } else {
             throw new Error("no data for SystemStatus")

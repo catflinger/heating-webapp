@@ -11,7 +11,7 @@ export class ControlDummyService implements IControlService {
     constructor(private http: HttpClient) {
     }
 
-    setOverride(state: boolean): Observable<boolean> {
+    setOverride(duration: number): Observable<boolean> {
         return Observable.of(true);
     }
 

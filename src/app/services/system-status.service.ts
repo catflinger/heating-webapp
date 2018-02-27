@@ -13,6 +13,8 @@ export class SystemStatusService implements ISystemStatusService {
     constructor(private http: HttpClient) {
     }
 
+    refresh(){}
+
     public getStatus(): Observable<SystemStatus> {
         return this.http.get("/api/status")
             .map((res: Response) => {

@@ -36,4 +36,9 @@ export class SummaryInfoComponent implements OnInit {
                 }
             );
     }
+
+    aaaaa(): void {
+        console.log("clicked refresah buttom")
+        this.statusService.refresh();
+    }
 }

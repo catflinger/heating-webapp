@@ -19,6 +19,7 @@ import { ProgramDummyService } from './services/program-dummy.service';
 import { ProgramInfoComponent } from './program-info/program-info.component';
 import { PageTitleComponent } from './page-title/page-title.component';
 import { ProgramEditComponent } from './program-edit/program-edit.component';
+import { SystemStatusDummyServiceB } from './services/system-status-dummy-b.service';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/info', pathMatch: 'full' },
@@ -49,7 +50,7 @@ const appRoutes: Routes = [
     ],
     providers: [
         { provide: INJECTABLES.ControlService, useClass: ControlDummyService },
-        { provide: INJECTABLES.SystemStatusService, useClass: SystemStatusDummyService },
+        { provide: INJECTABLES.SystemStatusService, useClass: SystemStatusDummyServiceB },
         { provide: INJECTABLES.ProgramService, useClass: ProgramDummyService },
         { provide: INJECTABLES.SlotsPerDay, useValue: 10 }
     ],

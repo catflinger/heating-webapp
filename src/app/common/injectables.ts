@@ -23,10 +23,11 @@ export let INJECTABLES = {
 
 export interface ISystemStatusService {
     getStatus(): Observable<SystemStatus>;
+    refresh(): void;
 }
 
 export interface IControlService {
-    setOverride(state: boolean): Observable<boolean>;
+    setOverride(duration: number): Observable<boolean>;
     clearOverride(): Observable<boolean>;
 }
 

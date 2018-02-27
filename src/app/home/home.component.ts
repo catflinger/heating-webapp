@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { IControlService, ISystemStatusService } from "../common/injectables";
+import { IControlService, ISystemStatusService, slotsPerHour } from "../common/injectables";
 import { INJECTABLES } from "../common/injectables";
+import { SystemStatus } from '../common/system-status';
 
 @Component({
     selector: 'app-home',
@@ -9,21 +10,28 @@ import { INJECTABLES } from "../common/injectables";
 })
 export class HomeComponent implements OnInit {
     private successMessage: string;
-    constructor(@Inject(INJECTABLES.ControlService) private controlService: IControlService) { }
+    private status: SystemStatus;
+
+    constructor(
+        @Inject(INJECTABLES.SystemStatusService) private statusService: ISystemStatusService,
+        @Inject(INJECTABLES.ControlService) private controlService: IControlService) { }
 
     ngOnInit() {
+        this.statusService.getStatus()
+        .catch((error) => null)
+        .subscribe((s: SystemStatus) => this.status = s);
     }
 
     clearMessage(): void {
         this.successMessage = null;
     }
 
-    setOverride(state: boolean): void {
+    setOverride(): void {
         this.successMessage = null;
 
         // send a message to the server to do something
 
-        this.controlService.setOverride(state)
+        this.controlService.setOverride(1 * slotsPerHour)
             .subscribe(
             (result) => {
                 this.successMessage = result ? "Heating boost set." : "Failed to set the heating override";

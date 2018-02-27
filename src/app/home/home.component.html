@@ -5,7 +5,10 @@
     <button type="button" class="btn btn-primary pull-right" (click)="clearMessage()">OK</button>
 </div>
 <p>
-    <button type="button" class="btn btn-outline-primary btn-block" (click)="setOverride(true)">I'm cold, put the heating on!</button>
+    bedroom temperature is {{status.controller.activeProgram.hwmax}} 
+</p>
+<p>
+    <button type="button" class="btn btn-outline-primary btn-block" (click)="setOverride()">I'm cold, put the heating on!</button>
 </p>
 <p>
     <button type="button" class="btn btn-outline-primary btn-block" (click)="clearOverride()">Its too damn hot in here</button>

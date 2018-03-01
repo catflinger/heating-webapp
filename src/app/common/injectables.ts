@@ -2,7 +2,7 @@ import { InjectionToken } from "@angular/core";
 import { Observable } from "rxjs";
 import { SystemStatus } from "./system-status";
 import { Program } from "./program";
-import { ProgramManager } from "./program-manager";
+import { TemperatureSensor } from "./temperature-sensor";
 
 export const slotsPerHour: number = 6;
 export const hoursPerDay: number = 24;
@@ -15,10 +15,13 @@ export enum ProgramMode {
 }
 
 export let INJECTABLES = {
-    SystemStatusService: new InjectionToken("SystemStatusService"),
-    ControlService: new InjectionToken("ControlService"),
-    ProgramService: new InjectionToken("ProgramService"),
-    SlotsPerDay: new InjectionToken("SlotsPerDay"),
+    SystemStatusService: new InjectionToken<ISystemStatusService>("SystemStatusService"),
+    ControlService: new InjectionToken<IControlService>("ControlService"),
+    ProgramService: new InjectionToken<IProgramService>("ProgramService"),
+    ProgramConfigService: new InjectionToken<IProgramConfigService>("ProgramConfigService"),
+    SensorService: new InjectionToken<ISensorService>("SensorService"),
+    SlotsPerDay: new InjectionToken<number>("SlotsPerDay"),
+    AppConfig: new InjectionToken<IAppConfig>("AppConfig"),
 };
 
 export interface ISystemStatusService {
@@ -31,11 +34,36 @@ export interface IControlService {
     clearOverride(): Observable<boolean>;
 }
 
+export interface ISensorService {
+    listSensors(): Observable<ISensor[]>;
+    getSensor(id: string): Observable<ISensor>;
+}
+
 export interface IProgramService {
-    
-    getProgramManager(): Observable<ProgramManager>;
+    listPrograms(): Observable<Program[]>;
     getProgram(id: string): Observable<Program>;
     saveProgram(program: Program): Observable<any>;
     deleteProgram(id: string): Observable<any>;
-    activateProgram(id: string, mode: ProgramMode): Observable<any>;
+}
+
+export interface IProgramConfigService {
+    
+    getProgramConfig(): Observable<IProgramConfig>;
+    setProgramConfig(config:IProgramConfig): Observable<any>;
+}
+
+export interface IAppConfig {
+    apiBase: string;
+}
+
+export interface IProgramConfig {
+    weekdayProgramId: string;
+    saturdayProgramId: string;
+    sundayProgramId: string;
+}
+
+export interface ISensor {
+    id: string;
+    value: number;
+    description: string;
 }

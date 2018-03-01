@@ -1,13 +1,13 @@
 <app-page-title [title]="'Heating Programs'"></app-page-title>
 
-<div class="container">
+<div class="container" *ngIf="programConfig">
 
     <div class="row">
         <div class="col">
             Weekday program:
         </div>
         <div class="col">
-            {{programManager.weekdayProgram.name}}
+            {{getProgram(programModes.Weekday).name}}
         </div>
     </div>
     
@@ -16,7 +16,7 @@
             Saturday program:
         </div>
         <div class="col">
-            {{programManager.saturdayProgram.name}}
+            {{getProgram(programModes.Saturday).name}}
         </div>
     </div>
     
@@ -25,7 +25,7 @@
             Sunday program:
         </div>
         <div class="col">
-            {{programManager.sundayProgram.name}}
+            {{getProgram(programModes.Sunday).name}}
         </div>
     </div>
     
@@ -42,7 +42,7 @@
 
             <div class="card-deck mb-3 text-center">
 
-                <div class="card mb-4 box-shadow" *ngFor="let p of programManager.programs">
+                <div class="card mb-4 box-shadow" *ngFor="let p of programs">
                     <div class="card-header">
                         <h4 class="my-0 font-weight-normal">{{p.name}}</h4>
                     </div>

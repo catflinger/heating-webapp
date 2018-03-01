@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { SystemStatus } from "../common/system-status";
-import { ISystemStatusService } from "../common/injectables";
+import { ISystemStatusService, ISensorService, ISensor } from "../common/injectables";
 import { INJECTABLES } from "../common/injectables";
 
 @Component({
@@ -10,10 +10,12 @@ import { INJECTABLES } from "../common/injectables";
 })
 export class SummaryInfoComponent implements OnInit {
     private status: SystemStatus;
+    private sensors: ISensor[];
     private successMessage: string;
 
     constructor(
         @Inject(INJECTABLES.SystemStatusService) private statusService: ISystemStatusService,
+        @Inject(INJECTABLES.SensorService) private sensorService: ISensorService
         ) {
     }
 
@@ -30,6 +32,15 @@ export class SummaryInfoComponent implements OnInit {
             .subscribe(
                 (status) => {
                     this.status = status;
+                },
+                (error) => {
+                    this.successMessage = "Failed to get the system status info: " + error;
+                }
+            );
+        this.sensorService.listSensors()
+            .subscribe(
+                (sensors) => {
+                    this.sensors = sensors;
                 },
                 (error) => {
                     this.successMessage = "Failed to get the system status info: " + error;

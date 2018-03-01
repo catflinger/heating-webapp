@@ -4,9 +4,14 @@
 <div class="alert alert-success" *ngIf="successMessage">{{successMessage}}
     <button type="button" class="btn btn-primary pull-right" (click)="clearMessage()">OK</button>
 </div>
+<div *ngIf="sensors">
 <p>
-    bedroom temperature is {{status.controller.activeProgram.hwmax}} 
+    bedroom temperature is {{getSensorReading("bedroom")}} 
 </p>
+<p>
+    hot water temperature is {{getSensorReading("hw")}} 
+</p>
+</div>
 <p>
     <button type="button" class="btn btn-outline-primary btn-block" (click)="setOverride()">I'm cold, put the heating on!</button>
 </p>

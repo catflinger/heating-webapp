@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Program } from '../common/program';
 import { ProgramChartComponent } from '../program-chart/program-chart.component';
 import { v4 as guid } from "uuid";
-import { ProgramManager } from '../common/program-manager';
 
 @Injectable()
 export class ProgramDummyService implements IProgramService {
@@ -12,36 +11,8 @@ export class ProgramDummyService implements IProgramService {
     constructor() { 
     }
 
-    activateProgram(id: string, mode: ProgramMode): Observable<any> {
-
-        switch (mode) {
-            case ProgramMode.Weekday :
-                this.data.weekday = id;
-                break;
-            case ProgramMode.Saturday :
-                this.data.saturday = id;
-                break;
-            case ProgramMode.Sunday :
-                this.data.sunday = id;
-                break;
-            default:
-                break;
-        }
-        return Observable.of(true);
-    }
-
-    getProgramManager(): Observable<ProgramManager> {
-        let result = new ProgramManager();
-
-        result.weekdayId = this.data.weekday;
-        result.saturdayId = this.data.saturday;
-        result.sundayId = this.data.sunday;
-
-        this.data.programs.forEach((p: any) => {
-            result.programs.push(new Program(p));
-        });
-
-        return Observable.of(result);
+    listPrograms(): Observable<Program[]> {
+        throw new Error("Method not implemented.");
     }
 
     getProgram(id: string): Observable<Program> {

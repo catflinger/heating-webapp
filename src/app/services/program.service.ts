@@ -1,56 +1,46 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { IProgramService, ProgramMode } from '../common/injectables';
+import { IProgramService, ProgramMode, IAppConfig, INJECTABLES } from '../common/injectables';
 import { Program } from '../common/program';
-import { ProgramManager } from '../common/program-manager';
 
 @Injectable()
 export class ProgramService implements IProgramService {
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+        @Inject(INJECTABLES.AppConfig) private appConfig: IAppConfig) {
     }
 
-    public activateProgram(id: string, mode: ProgramMode): Observable<any> {
-        return this.http.post("/api/activate-program", { id, mode });
-    }
-    
-    public getProgram(id: string): Observable<Program> {
-        return this.http.get(`/api/program/${id}`)
-        .map( (data: any): Program => new Program(data));
-    }
-    
-    public getProgramManager(): Observable<ProgramManager> {
-        
-        return this.http.get("/api/program")
+    public listPrograms(): Observable<Program[]> {
+        return this.http.get(this.appConfig.apiBase + "/api/program")
+        .map( (data: any): Program[] => {
 
-        .map( (data: any): ProgramManager => {
-            const result: ProgramManager = new ProgramManager();
+            console.log(JSON.stringify(data));
 
-            result.weekdayId = data.weekday;
-            result.saturdayId = data.saturday;
-            result.sundayId = data.sunday;
-    
-            data.programs.array.forEach( (element: any) => {
-                result.programs.push(new Program(element));
+            const result: Program[] = [];
+            data.items.forEach((p: any) => {
+               result.push(new Program(p)); 
             });
-
             return result;
         });
+    }    
+    public getProgram(id: string): Observable<Program> {
+        return this.http.get(this.appConfig.apiBase + `/api/program/${id}`)
+        .map( (data: any): Program => new Program(data));
     }
 
     saveProgram(program: Program): Observable<any> {
 
         if (program.id) {
-            return this.http.post(`/api/program/${program.id}`, program);
+            return this.http.post(this.appConfig.apiBase + `/api/program/${program.id}`, program);
         } else {
-            return this.http.put("/api/program", program);
+            return this.http.put(this.appConfig.apiBase + "/api/program", program);
         }
     }
 
     deleteProgram(id: string): Observable<any> {
 
-        return this.http.delete(`/program/${id}`);
+        return this.http.delete(this.appConfig.apiBase + `/program/${id}`);
     }
 }

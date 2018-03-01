@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { IControlService, ISystemStatusService, slotsPerHour } from "../common/injectables";
+import { IControlService, ISystemStatusService, slotsPerHour, ISensorService, ISensor } from "../common/injectables";
 import { INJECTABLES } from "../common/injectables";
 import { SystemStatus } from '../common/system-status';
 
@@ -11,22 +11,28 @@ import { SystemStatus } from '../common/system-status';
 export class HomeComponent implements OnInit {
     private successMessage: string;
     private status: SystemStatus;
+    private sensors: ISensor[];
 
     constructor(
         @Inject(INJECTABLES.SystemStatusService) private statusService: ISystemStatusService,
-        @Inject(INJECTABLES.ControlService) private controlService: IControlService) { }
+        @Inject(INJECTABLES.ControlService) private controlService: IControlService,
+        @Inject(INJECTABLES.SensorService) private sensorService: ISensorService) { }
 
     ngOnInit() {
         this.statusService.getStatus()
         .catch((error) => null)
         .subscribe((s: SystemStatus) => this.status = s);
+
+        this.sensorService.listSensors()
+        .catch((error) => null)
+        .subscribe((s: ISensor[]) => this.sensors = s);
     }
 
-    clearMessage(): void {
+    private clearMessage(): void {
         this.successMessage = null;
     }
 
-    setOverride(): void {
+    private setOverride(): void {
         this.successMessage = null;
 
         // send a message to the server to do something
@@ -43,7 +49,7 @@ export class HomeComponent implements OnInit {
             );
     }
 
-    clearOverride(): void {
+    private clearOverride(): void {
         this.successMessage = null;
 
         // send a message to the server to do something
@@ -59,5 +65,8 @@ export class HomeComponent implements OnInit {
             }
             );
     }
-
+    
+    getSensorReading(id: string): number {
+        return this.sensors.find((s) => s.id === id).value;
+    }
 }

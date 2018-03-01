@@ -16,7 +16,7 @@ export class Program {
         if (src) {
             this.hwmin = Validate.isNumber(src.hwmin, "hwmin");
             this.hwmax = Validate.isNumber(src.hwmax, "hwmax");
-            this.chmax = Validate.isNumber(src.chmax, "chmax");
+            this.chmax = 0 // Validate.isNumber(src.chmax, "chmax");
             this.id = src.id;
             this.name = src.name;
 

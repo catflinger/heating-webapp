@@ -48,27 +48,27 @@
             <h3>Environment</h3>
         </div>
     </div>
-    <div class="row" *ngFor="let sensor of status.env.sensors">
+    <div class="row" *ngFor="let sensor of sensors">
         <div class="col-sm-6">{{ sensor.description}}</div>
         <div class="col-sm-6">{{ sensor.value }}</div>
     </div>
     <div class="row">
         <div class="col">
             <h3>Program</h3>
-            <p>{{status.controller.activeProgram.name}}</p>
+            <p>{{status.activeProgram.name}}</p>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-6">Hot water min</div>
-        <div class="col-sm-6">{{status.controller.activeProgram.hwmin }}</div>
+        <div class="col-sm-6">{{status.activeProgram.hwmin }}</div>
     </div>
     <div class="row">
         <div class="col-sm-6">Hot water max</div>
-        <div class="col-sm-6">{{status.controller.activeProgram.hwmax }}</div>
+        <div class="col-sm-6">{{status.activeProgram.hwmax }}</div>
     </div>
     <!-- <div class="row">
         <div class="col">
-            <app-program-chart [program]="status.controller.activeProgram"></app-program-chart>
+            <app-program-chart [program]="status.activeProgram"></app-program-chart>
         </div>
     </div> -->
     <div class="row">

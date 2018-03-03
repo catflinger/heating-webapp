@@ -13,7 +13,7 @@ export class Program {
     public name: string;
 
     constructor(src: any) {
-        if (src) {
+        if (src) { 
             this.hwmin = Validate.isNumber(src.hwmin, "hwmin");
             this.hwmax = Validate.isNumber(src.hwmax, "hwmax");
             this.chmax = 0 // Validate.isNumber(src.chmax, "chmax");

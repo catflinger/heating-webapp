@@ -60,6 +60,7 @@ export interface IProgramConfig {
     weekdayProgramId: string;
     saturdayProgramId: string;
     sundayProgramId: string;
+    clone(): IProgramConfig;
 }
 
 export interface ISensor {

@@ -23,7 +23,6 @@ export class SystemStatusDummyService implements ISystemStatusService {
             this.bSubject = <BehaviorSubject<SystemStatus>>new BehaviorSubject(null);
         }
 
-        console.log("getting data");
         this.data.items[3].snapshot.activeProgram.hwmax++;
 
         Observable.of(this.data)

@@ -14,7 +14,7 @@ export class ProgramConfigService implements IProgramConfigService {
     }
 
     public setProgramConfig(config: IProgramConfig): Observable<any> {
-        return this.http.post(this.appConfig.apiBase + "/api/activate-program", config);
+        return this.http.put(this.appConfig.apiBase + "/api/program-config", config);
     }
     
     public getProgramConfig(): Observable<IProgramConfig> {
@@ -22,8 +22,6 @@ export class ProgramConfigService implements IProgramConfigService {
         return this.http.get(this.appConfig.apiBase + "/api/program-config")
 
         .map( (data: any): IProgramConfig => {
-
-            console.log(JSON.stringify(data));
 
             const result: IProgramConfig = new ProgramConfig();
 

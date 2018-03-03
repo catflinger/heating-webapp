@@ -16,31 +16,30 @@ export class ProgramService implements IProgramService {
         return this.http.get(this.appConfig.apiBase + "/api/program")
         .map( (data: any): Program[] => {
 
-            console.log(JSON.stringify(data));
-
             const result: Program[] = [];
             data.items.forEach((p: any) => {
                result.push(new Program(p)); 
             });
             return result;
         });
-    }    
+    }
+       
     public getProgram(id: string): Observable<Program> {
-        return this.http.get(this.appConfig.apiBase + `/api/program/${id}`)
-        .map( (data: any): Program => new Program(data));
+        return this.http
+        .get(this.appConfig.apiBase + `/api/program/${id}`)
+        .map((data: any): Program => new Program(data));
     }
 
-    saveProgram(program: Program): Observable<any> {
-
+    public saveProgram(program: Program): Observable<any> {
         if (program.id) {
-            return this.http.post(this.appConfig.apiBase + `/api/program/${program.id}`, program);
+            return this.http.post<Program>(this.appConfig.apiBase + `/api/program/${program.id}`, program);
         } else {
-            return this.http.put(this.appConfig.apiBase + "/api/program", program);
+            return this.http.put<Program>(this.appConfig.apiBase + "/api/program", program);
         }
     }
 
-    deleteProgram(id: string): Observable<any> {
+    public deleteProgram(id: string): Observable<any> {
 
-        return this.http.delete(this.appConfig.apiBase + `/program/${id}`);
+        return this.http.delete(this.appConfig.apiBase + `/api/program/${id}`);
     }
 }

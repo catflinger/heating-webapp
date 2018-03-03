@@ -25,10 +25,18 @@ export class ProgramListComponent implements OnInit {
     ngOnInit() {
     }
 
-    private btnActivate(program: Program, mode: ProgramMode) {
-        this.programConfigServcie.setProgramConfig(new ProgramConfig())
+    private btnActivate(id: string, mode: ProgramMode) {
+        const newConfig = this.programConfig.clone();
+        if (mode === ProgramMode.Saturday) {
+            newConfig.saturdayProgramId = id;
+        } else if (mode === ProgramMode.Sunday) {
+            newConfig.sundayProgramId = id;
+        } else {
+            newConfig.weekdayProgramId = id;
+        }
+        this.programConfigServcie.setProgramConfig(newConfig)
         .subscribe( () => {
-            this.programs = undefined;
+            this.programs = [];
             this.listPrograms();
         });
     }
@@ -46,18 +54,18 @@ export class ProgramListComponent implements OnInit {
         });
     }
 
-    private btnEdit(program: Program) {
-        this.router.navigateByUrl(`/program-edit/${program.id}`);
+    private btnEdit(id: string) {
+        this.router.navigate(["program-edit", id]);
     }
 
     private btnAdd() {
-        this.router.navigateByUrl("/program-edit/0");
+        this.router.navigate(["program-edit", "0"]);
     }
 
     private btnDelete(program: Program) {
         this.programServcie.deleteProgram(program.id)
         .subscribe( () => {
-            this.programs = undefined;
+            this.programs = [];
             this.listPrograms();
         });
     }

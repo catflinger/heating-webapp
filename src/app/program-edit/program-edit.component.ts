@@ -23,18 +23,19 @@ export class ProgramEditComponent implements OnInit {
 
     ngOnInit() {
 
-        let id: any = this.route.snapshot.params["id"];
+        let id: any = this.route.snapshot.params.id;
 
         if (typeof id === "string" && id !== "0") {
             
             // get an existing program
-            this.programService.getProgram(id).subscribe((p) => {
-                this.useProgram(p);
-            });
+            this.programService.getProgram(id)
+            .subscribe(
+                (p) => this.useProgram(p),
+                (err) => alert("could not find program " + err));
 
         } else {
             // create a new program
-            this.useProgram(new Program(undefined));
+            this.useProgram(new Program(null));
         }
     }
 

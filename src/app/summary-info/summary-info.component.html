@@ -27,6 +27,17 @@
 
     <div class="row">
         <div class="col">
+            <h3>Overrides</h3>
+        </div>
+    </div>
+    <div class="row" *ngFor="let ov of status.overrides">
+        <div class="col-sm-3">Override for {{ov.duration}}</div>
+        <div class="col-sm-3">Set at slot number {{ov.start}}</div>
+        <div class="col-sm-6"></div>
+    </div>
+
+    <div class="row">
+        <div class="col">
             <h3>Devices</h3>
         </div>
     </div>

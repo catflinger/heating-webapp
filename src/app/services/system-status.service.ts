@@ -29,7 +29,10 @@ export class SystemStatusService implements ISystemStatusService {
         }
 
         this.http.get(this.appConfig.apiBase + "/api/status")
-        .map((data) => new SystemStatus(data))
+        .map((data) => {
+            console.log("SUMMARY API RESPONSE:" + JSON.stringify(data));
+            return new SystemStatus(data)
+        })
         .subscribe((s) => this.bSubject.next(s));
     }
 

@@ -20,14 +20,14 @@ import { SystemStatusService } from "./services/system-status.service";
 import { ControlService } from "./services/control.service";
 import { ProgramService } from './services/program.service';
 
-import { SystemStatusDummyService } from "./services/system-status-dummy.service";
+//import { SystemStatusDummyService } from "./services/system-status-dummy.service";
 import { SensorService } from './services/sensor.service';
 import { ProgramConfigService } from './services/program-config.service';
 // import { ControlDummyService } from "./services/control-dummy.service";
 // import { ProgramDummyService } from './services/program-dummy.service';
 
 const appConfig: IAppConfig = {
-    get apiBase(): string { return "http://localhost:3000"; }
+    get apiBase(): string { return "http://cherrypi:3000"; }
 }
 
 const appRoutes: Routes = [

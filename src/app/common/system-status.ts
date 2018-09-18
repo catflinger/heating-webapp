@@ -8,6 +8,7 @@ export class SystemStatus {
     public control: ControlStatus;
     public device: DeviceStatus;
     public activeProgram: ActiveProgramStatus;
+    public overrides: OverrideStatus[] = [];
 
     constructor(src: any) {
 
@@ -25,6 +26,15 @@ export class SystemStatus {
                         const activeProgramData: any = (src.items as any[]).find((item) => item.id === "activeProgram");
                         if (activeProgramData && activeProgramData.snapshot) {
                             this.activeProgram = new ActiveProgramStatus(activeProgramData.snapshot);
+
+                            const ovData: any = (src.items as any[]).find((item) => item.id === "overrides");
+                            if (ovData && ovData.snapshot) {
+                                (ovData.snapshot as OverrideStatus[]).forEach((ov) => this.overrides.push(ov));
+                               
+                            } else {
+                                throw new Error("invalid data: overrides missing")
+                            }
+                                
                         } else {
                             throw new Error("invalid data: controller missing")
                         }

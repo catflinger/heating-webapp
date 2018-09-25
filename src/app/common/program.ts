@@ -6,16 +6,16 @@ import { INJECTABLES, slotsPerDay } from "./injectables";
 
 export class Program {
     public slots: boolean[] = [];
-    public hwmax: number;
-    public hwmin: number;
+    public maxHWTemp: number;
+    public minHWTemp: number;
     public chmax: number;
     public id: string;
     public name: string;
 
     constructor(src: any) {
         if (src) { 
-            this.hwmin = Validate.isNumber(src.hwmin, "hwmin");
-            this.hwmax = Validate.isNumber(src.hwmax, "hwmax");
+            this.minHWTemp = Validate.isNumber(src.minHWTemp, "minHWTemp");
+            this.maxHWTemp = Validate.isNumber(src.maxHWTemp, "maxHWTemp");
             this.chmax = 0 // Validate.isNumber(src.chmax, "chmax");
             this.id = src.id;
             this.name = src.name;
@@ -29,8 +29,8 @@ export class Program {
             }
         } else {
             // set default values
-            this.hwmax = 50;
-            this.hwmin = 40;
+            this.maxHWTemp = 50;
+            this.minHWTemp = 40;
             this.chmax = 18;
             this.name = "new program";
             this.id = null;

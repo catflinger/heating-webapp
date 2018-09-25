@@ -1,6 +1,10 @@
+import { isNumber } from "util";
+
 export class ActiveProgramStatus {
     id: string;
     name: string;
+    maxHWTemp: number;
+    minHWTemp: number;
 
     constructor(src: any) {
         if (src) {
@@ -8,6 +12,12 @@ export class ActiveProgramStatus {
                 this.id = src.id;
                 if (src.name) {
                     this.name = src.name;
+                    if (isNumber(src.maxHWTemp)) {
+                        this.maxHWTemp = parseInt(src.maxHWTemp);
+                    }
+                    if (isNumber(src.minHWTemp)) {
+                        this.minHWTemp = parseInt(src.minHWTemp);
+                    }
                 } else {
                     throw new Error("no name data for activeprogram");
                 }

@@ -2,7 +2,7 @@
 
 <app-page-title [title]="'System Status'"></app-page-title>
 
-<div class="container" *ngIf="status">
+<div class="container-fluid" *ngIf="status">
     <div class="row">
         <div class="col">
             <h3>Heating</h3>
@@ -15,7 +15,7 @@
     </div>
 
     <div class="row">
-        <div class="col">
+        <div class="col-sm-12">
             <h3>Hot water</h3>
         </div>
     </div>
@@ -26,18 +26,18 @@
     </div>
 
     <div class="row">
-        <div class="col">
+        <div class="col-sm-12">
             <h3>Overrides</h3>
         </div>
     </div>
     <div class="row" *ngFor="let ov of status.overrides">
-        <div class="col-sm-3">Override for {{ov.duration}}</div>
-        <div class="col-sm-3">Set at slot number {{ov.start}}</div>
+        <div class="col-sm-3">Override for {{ov.duration * minutesPerSlot}} minutes</div>
+        <div class="col-sm-3">Set at {{ov.date | date:'hh:mm'}}</div>
         <div class="col-sm-6"></div>
     </div>
 
     <div class="row">
-        <div class="col">
+        <div class="col-sm-12">
             <h3>Devices</h3>
         </div>
     </div>
@@ -55,27 +55,27 @@
     </div>
 
     <div class="row">
-        <div class="col">
+        <div class="col-sm-12">
             <h3>Environment</h3>
         </div>
     </div>
     <div class="row" *ngFor="let sensor of sensors">
-        <div class="col-sm-6">{{ sensor.description}}</div>
-        <div class="col-sm-6">{{ sensor.value }}</div>
+        <div class="col-sm-3">{{ sensor.description}}</div>
+        <div class="col-sm-9">{{ sensor.value | number:'1.0-0' }}</div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-sm-12">
             <h3>Program</h3>
             <p>{{status.activeProgram.name}}</p>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">Hot water min</div>
-        <div class="col-sm-6">{{status.activeProgram.hwmin }}</div>
+        <div class="col-sm-3">Hot water min</div>
+        <div class="col-sm-9">{{status.activeProgram.minHWTemp | number:'1.0-0' }}</div>
     </div>
     <div class="row">
-        <div class="col-sm-6">Hot water max</div>
-        <div class="col-sm-6">{{status.activeProgram.hwmax }}</div>
+        <div class="col-sm-3">Hot water max</div>
+        <div class="col-sm-9">{{status.activeProgram.maxHWTemp  | number:'1.0-0'}}</div>
     </div>
     <!-- <div class="row">
         <div class="col">
@@ -83,6 +83,6 @@
         </div>
     </div> -->
     <div class="row">
-        <div class="col-sm-12"><button type="button" (click)="aaaaa()">Refresh</button></div>
+        <div class="col-sm-12"><button class="btn btn-primary mt-1" (click)="onRefresh()">Refresh</button></div>
     </div>
 </div>

@@ -33,8 +33,8 @@ describe('ProgramChartComponent', () => {
 class TestComponentWrapper {
     program = new Program({
         slotsPerDay: 10,
-        hwmin: 40,
-        hwmax: 50,
+        minHWTemp: 40,
+        maxHWTemp: 50,
         slots: [
             true,
             true,

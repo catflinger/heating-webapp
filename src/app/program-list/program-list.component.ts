@@ -43,7 +43,7 @@ export class ProgramListComponent implements OnInit {
 
     private listPrograms() {
         this.programServcie.listPrograms().subscribe( (programs: Program[]) => {
-            this.programs = programs;
+            this.programs = programs.sort((a, b) => a.name > b.name? 1 : 0);
             this.getProgramConfig();
         });
     }

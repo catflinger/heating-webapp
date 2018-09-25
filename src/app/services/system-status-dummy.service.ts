@@ -23,7 +23,7 @@ export class SystemStatusDummyService implements ISystemStatusService {
             this.bSubject = <BehaviorSubject<SystemStatus>>new BehaviorSubject(null);
         }
 
-        this.data.items[3].snapshot.activeProgram.hwmax++;
+        this.data.items[3].snapshot.activeProgram.maxHWTemp++;
 
         Observable.of(this.data)
         .map((data) => new SystemStatus(data))
@@ -75,8 +75,8 @@ export class SystemStatusDummyService implements ISystemStatusService {
                     activeProgram: {
                         id: "ab-456cde-003-463",
                         name: "winter weekends",
-                        "hwmax": 50,
-                        "hwmin": 40,
+                        "maxHWTemp": 50,
+                        "minHWTemp": 40,
                         "chmax": 19,
                         "slots": new Array(slotsPerDay).fill(false),
                     }

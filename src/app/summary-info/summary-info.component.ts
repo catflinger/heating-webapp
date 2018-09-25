@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { SystemStatus } from "../common/system-status";
-import { ISystemStatusService, ISensorService, ISensor } from "../common/injectables";
-import { INJECTABLES } from "../common/injectables";
+import { INJECTABLES, ISystemStatusService, ISensorService, ISensor, minutesPerSlot } from "../common/injectables";
 
 @Component({
     selector: 'app-summary-info',
@@ -12,6 +11,7 @@ export class SummaryInfoComponent implements OnInit {
     private status: SystemStatus;
     private sensors: ISensor[];
     private successMessage: string;
+    private minutesPerSlot = minutesPerSlot;
 
     constructor(
         @Inject(INJECTABLES.SystemStatusService) private statusService: ISystemStatusService,
@@ -48,8 +48,9 @@ export class SummaryInfoComponent implements OnInit {
             );
     }
 
-    aaaaa(): void {
-        console.log("clicked refresah buttom")
+    onRefresh(): void {
+        console.log("clicked refresh buttom");
+        this.status = null;
         this.statusService.refresh();
     }
 }

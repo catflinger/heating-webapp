@@ -46,8 +46,8 @@ export class ProgramEditComponent implements OnInit {
         this.form = new FormGroup ({
             id: new FormControl(p.id),
             name: new FormControl(p.name,  Validators.required),
-            hwmax: new FormControl(p.hwmax,  Validators.required),
-            hwmin: new FormControl(p.hwmin,  Validators.required),
+            maxHWTemp: new FormControl(p.maxHWTemp,  Validators.required),
+            minHWTemp: new FormControl(p.minHWTemp,  Validators.required),
             hours: new FormArray([])
         });
 
@@ -78,8 +78,8 @@ export class ProgramEditComponent implements OnInit {
         // copy the modified data back into the model
         if (this.form.valid) {
             this.program.name = this.form.get("name").value;
-            this.program.hwmin = this.form.get("hwmin").value;
-            this.program.hwmax = this.form.get("hwmax").value;
+            this.program.minHWTemp = this.form.get("minHWTemp").value;
+            this.program.maxHWTemp = this.form.get("maxHWTemp").value;
             let n: number = 0;
             this.hourArray.controls.forEach( (ctls: FormArray) => {
                 ctls.controls.forEach( (ctl: FormControl) => {

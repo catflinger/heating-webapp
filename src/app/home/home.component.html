@@ -1,20 +1,50 @@
 <app-page-title [title]="'Heating Home'">
 </app-page-title>
 
-<div class="alert alert-success" *ngIf="successMessage">{{successMessage}}
-    <button type="button" class="btn btn-primary pull-right" (click)="clearMessage()">OK</button>
+<div class="container">
+    <div class="row">
+         <div class="col-auto">
+            <div class="content alert alert-success" *ngIf="successMessage">{{successMessage}}
+                <button type="button" class="btn btn-primary btn-success mt-1" (click)="clearMessage()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-auto">
+            <div class=content>
+                <button type="button" class="btn btn-primary mt-1" (click)="setOverride()">
+                    I'm cold, put the heating on!
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-auto">
+            <div class=content>
+                <button type="button" class="btn btn-primary mt-1" (click)="clearOverride()">
+                    Its too damn hot in here
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="sensors">
+        <div class="col-auto">
+            <div class=content>
+                bedroom temperature is {{getSensorReading("bedroom") | number:'1.0-0'}}
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="sensors">
+        <div class="col-auto">
+            <div class=content>
+                hot water temperature is {{getSensorReading("hw") | number:'1.0-0'}}
+            </div>
+        </div>
+    </div>
+
 </div>
-<div *ngIf="sensors">
-<p>
-    bedroom temperature is {{getSensorReading("bedroom")}} 
-</p>
-<p>
-    hot water temperature is {{getSensorReading("hw")}} 
-</p>
-</div>
-<p>
-    <button type="button" class="btn btn-outline-primary btn-block" (click)="setOverride()">I'm cold, put the heating on!</button>
-</p>
-<p>
-    <button type="button" class="btn btn-outline-primary btn-block" (click)="clearOverride()">Its too damn hot in here</button>
-</p>

@@ -36,8 +36,8 @@ describe('SystemStatusService', () => {
             expect(status.program.slots[3]).toEqual(false);
             expect(status.program.slots[9]).toEqual(true);
 
-            expect(status.program.hwmin).toEqual(40);
-            expect(status.program.hwmax).toEqual(50);
+            expect(status.program.minHWTemp).toEqual(40);
+            expect(status.program.maxHWTemp).toEqual(50);
         });
     }));
 });

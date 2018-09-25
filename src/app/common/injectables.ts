@@ -7,6 +7,7 @@ import { TemperatureSensor } from "./temperature-sensor";
 export const slotsPerHour: number = 6;
 export const hoursPerDay: number = 24;
 export const slotsPerDay: number = slotsPerHour * 24;
+export const minutesPerSlot: number = 60 / slotsPerHour;
 
 export enum ProgramMode {
     Weekday = 1,

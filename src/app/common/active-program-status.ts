@@ -5,6 +5,7 @@ export class ActiveProgramStatus {
     name: string;
     maxHWTemp: number;
     minHWTemp: number;
+    slots: boolean[] = [];
 
     constructor(src: any) {
         if (src) {
@@ -17,6 +18,11 @@ export class ActiveProgramStatus {
                     }
                     if (isNumber(src.minHWTemp)) {
                         this.minHWTemp = parseInt(src.minHWTemp);
+                    }
+                    if (Array.isArray(src.slots)) {
+                        for (const slot of src.slots) {
+                            this.slots.push(slot);
+                        }
                     }
                 } else {
                     throw new Error("no name data for activeprogram");

@@ -3,16 +3,33 @@ import { Program } from "./program";
 import { OverrideStatus } from "./override-status";
 import { DeviceStatus } from "./device-status";
 import { ActiveProgramStatus } from "./active-program-status";
+import { isNumber } from "util";
 
 export class SystemStatus {
     public control: ControlStatus;
     public device: DeviceStatus;
     public activeProgram: ActiveProgramStatus;
     public overrides: OverrideStatus[] = [];
+    public serverTime: Date;
+    public serverSlotsPerDay: number = 0;
+    public currentSlot: number = 0;
 
     constructor(src: any) {
 
         if (src) {
+            
+            if (src.setup) {
+                if (src.setup.datetime) {
+                    this.serverTime = new Date(src.setup.datetime);
+                }
+                if (isNumber(src.setup.slotsPerDay)) {
+                    this.serverSlotsPerDay = src.setup.slotsPerDay;
+                }
+                if (isNumber(src.setup.currentSlot)) {
+                    this.currentSlot = src.setup.currentSlot;
+                }
+            }
+
             if (Array.isArray(src.items)) {
 
                 const controlData: any = (src.items as any[]).find((item) => item.id === "control");

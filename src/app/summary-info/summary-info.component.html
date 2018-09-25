@@ -70,6 +70,11 @@
         </div>
     </div>
     <div class="row">
+        <div class="col">
+            <app-program-chart [program]="status.activeProgram"></app-program-chart>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-sm-3">Hot water min</div>
         <div class="col-sm-9">{{status.activeProgram.minHWTemp | number:'1.0-0' }}</div>
     </div>
@@ -78,11 +83,15 @@
         <div class="col-sm-9">{{status.activeProgram.maxHWTemp  | number:'1.0-0'}}</div>
     </div>
     <!-- <div class="row">
-        <div class="col">
-            <app-program-chart [program]="status.activeProgram"></app-program-chart>
-        </div>
-    </div> -->
-    <div class="row">
         <div class="col-sm-12"><button class="btn btn-primary mt-1" (click)="onRefresh()">Refresh</button></div>
+    </div> -->
+    <div class="row mt-5">
+        <div class="col-sm-12"><span class="feint">System time: {{status.serverTime}}</span></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12"><span class="feint">Slot number: {{status.currentSlot | number:'1.0-0'}}</span></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12"><span class="feint">Slots per hour: {{status.serverSlotsPerDay / 24 | number:'1.0-0'}}</span></div>
     </div>
 </div>

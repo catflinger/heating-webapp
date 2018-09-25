@@ -28,42 +28,79 @@ export class ProgramChartComponent implements OnInit, AfterViewInit {
         const el: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById(this.canvas.id);
         const ctx: CanvasRenderingContext2D = el.getContext("2d");
         ctx.translate(this.canvas.cx, this.canvas.cy);
-        ctx.rotate(-Math.PI/2);
 
         ctx.fillStyle = "#AAAAAA";
         ctx.beginPath();
         ctx.arc(0, 0, this.canvas.radius, 0, 2 * Math.PI, false);
         ctx.fill();
 
+        ctx.strokeStyle = "#AAAAAA";
+        ctx.beginPath();
+        ctx.arc(0, 0, this.canvas.radius + 20, 0, 2 * Math.PI, false);
+        ctx.stroke();
+
+
         this.program.slots.forEach( (val, idx) => {
             if (val) {
                 this.drawSlot(ctx, idx);
             }
         });
+
+        this.drawHourLines(ctx);
+
     }
 
     private drawSlot(ctx: CanvasRenderingContext2D, slotNumber: number): void {
 
-        ctx.fillStyle = "#AA0000";
+        ctx.fillStyle = "#FF4500";
         ctx.beginPath();
         ctx.moveTo(0, 0);
         ctx.arc(
             0, 
             0, 
             this.canvas.radius, 
-            slotNumber * this.slotAngle, 
-            (slotNumber + 1) * this.slotAngle, 
+            slotNumber * this.slotAngle - Math.PI/ 2, 
+            (slotNumber + 1) * this.slotAngle - Math.PI/ 2, 
             false);
         ctx.fill();
     }
 
+    private drawHourLines(ctx: CanvasRenderingContext2D):void {
+        for (let n = 0; n < 24; n++) {
+            let radians = (n * Math.PI * 2) / 24 - Math.PI / 2;
+            let tickFactor = n % 6 ? 0.9 : 0.8;
+            let captionFactor = 1.1;
+
+            let x1 = Math.cos(radians) * this.canvas.radius * tickFactor;
+            let y1 = Math.sin(radians) * this.canvas.radius * tickFactor;
+
+            let x2 = Math.cos(radians) * this.canvas.radius;
+            let y2 = Math.sin(radians) * this.canvas.radius;
+
+            let x3 = Math.cos(radians) * this.canvas.radius * captionFactor;
+            let y3 = Math.sin(radians) * this.canvas.radius * captionFactor;
+
+            ctx.strokeStyle = "#FFFFFF";
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2,y2);
+            ctx.stroke();
+
+            ctx.strokeStyle = "#666666";
+            ctx.font = "10px courier";
+            ctx.translate(-5, 2);
+            ctx.strokeText(n.toString(), x3, y3);
+            ctx.translate(5, -2);
+        }
+    }
 }
 
 class PieCanvas {
     public id: string;
     public radius: number = 100;
-    public get height(): number { return this.radius * 2 };
-    public get width(): number { return this.radius * 2 };
+    public border: number = 30;
+    public get height(): number { return this.radius * 2 + this.border * 2 };
+    public get width(): number { return this.radius * 2 + this.border * 2 };
     public get cx(): number { return this.width / 2 };
     public get cy(): number { return this.height / 2 };
 

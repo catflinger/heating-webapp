@@ -1,4 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { SystemStatus } from "../common/system-status";
 import { INJECTABLES, ISystemStatusService, ISensorService, ISensor, minutesPerSlot } from "../common/injectables";
 
@@ -14,6 +15,7 @@ export class SummaryInfoComponent implements OnInit {
     private minutesPerSlot = minutesPerSlot;
 
     constructor(
+        private router: Router,  
         @Inject(INJECTABLES.SystemStatusService) private statusService: ISystemStatusService,
         @Inject(INJECTABLES.SensorService) private sensorService: ISensorService
         ) {
@@ -46,6 +48,10 @@ export class SummaryInfoComponent implements OnInit {
                     this.successMessage = "Failed to get the system status info: " + error;
                 }
             );
+    }
+
+    private editProgram(id: string) {
+        this.router.navigate(["program-edit", id]);
     }
 
     onRefresh(): void {

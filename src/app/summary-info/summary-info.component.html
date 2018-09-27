@@ -71,7 +71,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <app-program-chart [program]="status.activeProgram"></app-program-chart>
+            <app-program-chart id="activeProgram" [program]="status.activeProgram" [overrides]="status.overrides" (click)="editProgram(status.activeProgram.id)"></app-program-chart>
         </div>
     </div>
     <div class="row">

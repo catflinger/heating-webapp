@@ -3,6 +3,7 @@ import { Program } from "../common/program";
 import { v4 as guid } from "uuid";
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { slotsPerDay } from '../common/injectables';
+import { OverrideStatus } from '../common/override-status';
 
 @Component({
     selector: 'app-program-chart',
@@ -15,6 +16,7 @@ export class ProgramChartComponent implements OnInit, AfterViewInit {
     private canvas: PieCanvas;
 
     @Input() public program: Program;
+    @Input() public overrides: OverrideStatus[];
 
     constructor() {
         this.canvas = new PieCanvas();
@@ -29,30 +31,37 @@ export class ProgramChartComponent implements OnInit, AfterViewInit {
         const ctx: CanvasRenderingContext2D = el.getContext("2d");
         ctx.translate(this.canvas.cx, this.canvas.cy);
 
+        ctx.strokeStyle = "#AAAAAA";
         ctx.fillStyle = "#AAAAAA";
         ctx.beginPath();
         ctx.arc(0, 0, this.canvas.radius, 0, 2 * Math.PI, false);
         ctx.fill();
 
-        ctx.strokeStyle = "#AAAAAA";
         ctx.beginPath();
         ctx.arc(0, 0, this.canvas.radius + 20, 0, 2 * Math.PI, false);
         ctx.stroke();
 
-
         this.program.slots.forEach( (val, idx) => {
             if (val) {
-                this.drawSlot(ctx, idx);
+                this.drawSlot(ctx, idx, "#CC3300");
             }
         });
 
-        this.drawHourLines(ctx);
+        if (Array.isArray(this.overrides)) {
+            this.overrides.forEach((ov) => {
+                for(let n: number = 0; n < ov.duration; n++) {
+                    this.drawSlot(ctx, ov.start + n, "#FFCC66");
+                }
+            });
+        }
 
+        this.drawHourLines(ctx);
     }
 
-    private drawSlot(ctx: CanvasRenderingContext2D, slotNumber: number): void {
+    private drawSlot(ctx: CanvasRenderingContext2D, slotNumber: number, color: string): void {
 
-        ctx.fillStyle = "#FF4500";
+        ctx.fillStyle = color;
+        ctx.strokeStyle = color;
         ctx.beginPath();
         ctx.moveTo(0, 0);
         ctx.arc(
@@ -63,6 +72,8 @@ export class ProgramChartComponent implements OnInit, AfterViewInit {
             (slotNumber + 1) * this.slotAngle - Math.PI/ 2, 
             false);
         ctx.fill();
+
+        ctx.stroke();
     }
 
     private drawHourLines(ctx: CanvasRenderingContext2D):void {

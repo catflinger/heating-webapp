@@ -5,3 +5,7 @@
 .feint {
     color: #CCCCCC;
 }
+
+#activeProgram:hover {
+    cursor: pointer;
+}

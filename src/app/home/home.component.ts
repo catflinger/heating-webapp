@@ -32,12 +32,10 @@ export class HomeComponent implements OnInit {
         this.successMessage = null;
     }
 
-    private setOverride(): void {
+    private setOverride(hours: number): void {
         this.successMessage = null;
 
-        // send a message to the server to do something
-
-        this.controlService.setOverride(1 * slotsPerHour)
+        this.controlService.setOverride(hours * slotsPerHour)
             .subscribe(
             (result) => {
                 this.successMessage = result ? "Heating boost set." : "Failed to set the heating override";
@@ -66,6 +64,10 @@ export class HomeComponent implements OnInit {
             );
     }
     
+    getSensorReadingByRole(role: string): number {
+        return this.sensors.find((s) => s.role === role).value;
+    }
+
     getSensorReading(id: string): number {
         return this.sensors.find((s) => s.id === id).value;
     }

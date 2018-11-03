@@ -16,18 +16,21 @@ import { ProgramInfoComponent } from './program-info/program-info.component';
 import { PageTitleComponent } from './page-title/page-title.component';
 import { ProgramEditComponent } from './program-edit/program-edit.component';
 
-import { SystemStatusService } from "./services/system-status.service";
+import { SensorService } from './services/sensor.service';
 import { ControlService } from "./services/control.service";
 import { ProgramService } from './services/program.service';
-
-//import { SystemStatusDummyService } from "./services/system-status-dummy.service";
-import { SensorService } from './services/sensor.service';
 import { ProgramConfigService } from './services/program-config.service';
-// import { ControlDummyService } from "./services/control-dummy.service";
-// import { ProgramDummyService } from './services/program-dummy.service';
+import { SystemStatusService } from "./services/system-status.service";
+
+import { ControlDummyService } from "./services/dummy/control-dummy.service";
+import { ProgramConfigDummyService } from './services/dummy/program-config-dummy.service';
+import { ProgramDummyService } from './services/dummy/program-dummy.service';
+import { SensorDummyService } from './services/dummy/sensor-dummy.service';
+import { SystemStatusDummyService } from "./services/dummy/system-status-dummy.service";
 
 const appConfig: IAppConfig = {
-    get apiBase(): string { return "http://cherrypi:3000"; }
+    // get apiBase(): string { return "http://cherrypi:3000"; }
+    get apiBase(): string { return "http://localhost:3000"; }
 }
 
 const appRoutes: Routes = [
@@ -58,17 +61,22 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes, { useHash: true })
     ],
     providers: [
-        // { provide: INJECTABLES.ControlService, useClass: ControlDummyService },
-        // { provide: INJECTABLES.SystemStatusService, useClass: SystemStatusDummyService },
-        // { provide: INJECTABLES.ProgramService, useClass: ProgramDummyService },
+        //  { provide: INJECTABLES.ControlService, useClass: ControlDummyService },
+        //  { provide: INJECTABLES.SystemStatusService, useClass: SystemStatusDummyService },
+        //  { provide: INJECTABLES.ProgramService, useClass: ProgramDummyService },
+        //  { provide: INJECTABLES.SensorService, useClass: SensorDummyService },
+        //  { provide: INJECTABLES.ProgramConfigService, useClass: ProgramConfigDummyService },
+
         { provide: INJECTABLES.ControlService, useClass: ControlService },
+        { provide: INJECTABLES.SensorService, useClass: SensorService },
         { provide: INJECTABLES.SystemStatusService, useClass: SystemStatusService },
         { provide: INJECTABLES.ProgramService, useClass: ProgramService },
         { provide: INJECTABLES.ProgramConfigService, useClass: ProgramConfigService },
-        { provide: INJECTABLES.SensorService, useClass: SensorService },
+
         { provide: INJECTABLES.SlotsPerDay, useValue: 10 },
         { provide: INJECTABLES.AppConfig, useValue: appConfig },
     ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
+

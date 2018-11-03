@@ -11,22 +11,25 @@
     </div>
 
     <div class="row">
-        <div class="col-auto">
-            <div class=content>
-                <button type="button" class="btn btn-primary mt-1" (click)="setOverride()">
-                    I'm cold, put the heating on!
-                </button>
-
+            <div class="col-auto">
+                <div class=content>
+                    <div>Put heating on</div>
+                    <div>
+                        <button type="button" class="btn btn-primary mt-1" (click)="setOverride(1)">1 hours</button>
+                        <button type="button" class="btn btn-primary mt-1" (click)="setOverride(2)">2 hours</button>
+                        <button type="button" class="btn btn-primary mt-1" (click)="setOverride(3)">3 hours</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
+    
     <div class="row">
         <div class="col-auto">
             <div class=content>
-                <button type="button" class="btn btn-primary mt-1" (click)="clearOverride()">
-                    Its too damn hot in here
-                </button>
+                <div>Cancel any heating overrides</div>
+                <div>
+                        <button type="button" class="btn btn-primary mt-1" (click)="clearOverride()">Clear</button>
+                </div>
             </div>
         </div>
     </div>
@@ -34,7 +37,7 @@
     <div class="row" *ngIf="sensors">
         <div class="col-auto">
             <div class=content>
-                bedroom temperature is {{getSensorReading("bedroom") | number:'1.0-0'}}
+                bedroom temperature is {{getSensorReadingByRole("hw") | number:'1.0-0'}}
             </div>
         </div>
     </div>
@@ -42,9 +45,8 @@
     <div class="row" *ngIf="sensors">
         <div class="col-auto">
             <div class=content>
-                hot water temperature is {{getSensorReading("hw") | number:'1.0-0'}}
+                hot water temperature is {{getSensorReadingByRole("hw") | number:'1.0-0'}}
             </div>
         </div>
     </div>
-
 </div>

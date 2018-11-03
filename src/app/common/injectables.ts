@@ -68,4 +68,5 @@ export interface ISensor {
     id: string;
     value: number;
     description: string;
+    role: string;
 }

@@ -21,9 +21,14 @@ export let INJECTABLES = {
     ProgramService: new InjectionToken<IProgramService>("ProgramService"),
     ProgramConfigService: new InjectionToken<IProgramConfigService>("ProgramConfigService"),
     SensorService: new InjectionToken<ISensorService>("SensorService"),
+    OneWireService: new InjectionToken<ISensorService>("OneWireService"),
     SlotsPerDay: new InjectionToken<number>("SlotsPerDay"),
     AppConfig: new InjectionToken<IAppConfig>("AppConfig"),
 };
+
+export interface IOneWireService {
+    getAvailableDevices(): Observable<string[]>;
+}
 
 export interface ISystemStatusService {
     getStatus(): Observable<SystemStatus>;

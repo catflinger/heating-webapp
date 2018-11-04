@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { ProgramInfoComponent } from './program-info/program-info.component';
 import { PageTitleComponent } from './page-title/page-title.component';
 import { ProgramEditComponent } from './program-edit/program-edit.component';
+import { SettingsComponent } from './settings/settings.component';
 
 import { SensorService } from './services/sensor.service';
 import { ControlService } from "./services/control.service";
@@ -27,6 +28,7 @@ import { ProgramConfigDummyService } from './services/dummy/program-config-dummy
 import { ProgramDummyService } from './services/dummy/program-dummy.service';
 import { SensorDummyService } from './services/dummy/sensor-dummy.service';
 import { SystemStatusDummyService } from "./services/dummy/system-status-dummy.service";
+import { OneWireService } from './services/onewire.service';
 
 const appConfig: IAppConfig = {
     // get apiBase(): string { return "http://cherrypi:3000"; }
@@ -37,6 +39,7 @@ const appRoutes: Routes = [
     { path: '', redirectTo: '/info', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'info', component: SummaryInfoComponent },
+    { path: 'settings', component: SettingsComponent },
     { path: 'programs', component: ProgramListComponent },
     { path: 'program-edit/:id', component: ProgramEditComponent },
     { path: '**', redirectTo: '/home' }
@@ -52,7 +55,8 @@ const appRoutes: Routes = [
         HomeComponent,
         ProgramInfoComponent,
         PageTitleComponent,
-        ProgramEditComponent
+        ProgramEditComponent,
+        SettingsComponent
     ],
     imports: [
         BrowserModule,
@@ -69,6 +73,7 @@ const appRoutes: Routes = [
 
         { provide: INJECTABLES.ControlService, useClass: ControlService },
         { provide: INJECTABLES.SensorService, useClass: SensorService },
+        { provide: INJECTABLES.OneWireService, useClass: OneWireService },
         { provide: INJECTABLES.SystemStatusService, useClass: SystemStatusService },
         { provide: INJECTABLES.ProgramService, useClass: ProgramService },
         { provide: INJECTABLES.ProgramConfigService, useClass: ProgramConfigService },

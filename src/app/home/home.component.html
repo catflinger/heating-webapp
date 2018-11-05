@@ -34,19 +34,9 @@
         </div>
     </div>
 
-    <div class="row" *ngIf="sensors">
-        <div class="col-auto">
-            <div class=content>
-                bedroom temperature is {{getSensorReadingByRole("hw") | number:'1.0-0'}}
-            </div>
-        </div>
+    <div class="row" *ngFor="let sensor of sensors">
+        <div class="col-auto">{{ sensor.description}}</div>
+        <div class="col-auto">{{ sensor.value | number:'1.0-0' }}</div>
     </div>
 
-    <div class="row" *ngIf="sensors">
-        <div class="col-auto">
-            <div class=content>
-                hot water temperature is {{getSensorReadingByRole("hw") | number:'1.0-0'}}
-            </div>
-        </div>
-    </div>
 </div>

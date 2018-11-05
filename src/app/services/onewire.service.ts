@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 
 import { IAppConfig, INJECTABLES, IOneWireService } from '../common/injectables';
 
+// This service provides information on the 1-wire devices currently connected to the bus
+
 @Injectable()
 export class OneWireService implements IOneWireService {
     getAvailableDevices(): Observable<string[]> {

@@ -30,7 +30,8 @@
     "tether": "^1.4.3",
     "zone.js": "^0.8.19",
     "uuid": "^3.2.1",
-    "popper.js": "^1.12.9"
+    "popper.js": "^1.12.9",
+    "linqts": "^1.12.2"
   },
   "devDependencies": {
     "@angular/cli": "1.6.7",

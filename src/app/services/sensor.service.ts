@@ -7,6 +7,9 @@ import { Program } from '../common/program';
 import { ProgramConfig } from '../common/program-config';
 import { TemperatureSensor } from '../common/temperature-sensor';
 
+// this service provides readings from the sensors currently configured in the controller
+// and allows the sensor configuration to be updated
+
 @Injectable()
 export class SensorService implements ISensorService {
 
@@ -30,8 +33,8 @@ export class SensorService implements ISensorService {
         });
     }
 
-    getSensor(id: string): Observable<ISensor> {
-        return this.http.get(this.appConfig.apiBase + "/api/sensor/" + id)
-        .map( (data: any): TemperatureSensor => new TemperatureSensor(data));
+    updateSensors(sensors: ISensor[]): Observable<boolean> {
+        return this.http.put(this.appConfig.apiBase + "/api/sensor/", { sensors: sensors })
+        .map( (data: any) => true );
     }
 }

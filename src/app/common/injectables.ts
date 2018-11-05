@@ -42,7 +42,7 @@ export interface IControlService {
 
 export interface ISensorService {
     listSensors(): Observable<ISensor[]>;
-    getSensor(id: string): Observable<ISensor>;
+    updateSensors(sensors: ISensor[]): Observable<boolean>;
 }
 
 export interface IProgramService {

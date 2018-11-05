@@ -11,7 +11,7 @@ import { SystemStatus } from '../common/system-status';
 export class HomeComponent implements OnInit {
     private successMessage: string;
     private status: SystemStatus;
-    private sensors: ISensor[];
+    private sensors: ISensor[] = [];
 
     constructor(
         @Inject(INJECTABLES.SystemStatusService) private statusService: ISystemStatusService,
@@ -62,13 +62,5 @@ export class HomeComponent implements OnInit {
                 this.successMessage = "Failed to clear the heating override: " + error;
             }
             );
-    }
-    
-    getSensorReadingByRole(role: string): number {
-        return this.sensors.find((s) => s.role === role).value;
-    }
-
-    getSensorReading(id: string): number {
-        return this.sensors.find((s) => s.id === id).value;
     }
 }

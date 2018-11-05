@@ -31,8 +31,8 @@ import { SystemStatusDummyService } from "./services/dummy/system-status-dummy.s
 import { OneWireService } from './services/onewire.service';
 
 const appConfig: IAppConfig = {
-    // get apiBase(): string { return "http://cherrypi:3000"; }
-    get apiBase(): string { return "http://localhost:3000"; }
+    get apiBase(): string { return "http://cherrypi:3000"; }
+    // get apiBase(): string { return "http://localhost:3000"; }
 }
 
 const appRoutes: Routes = [

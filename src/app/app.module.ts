@@ -29,10 +29,12 @@ import { ProgramDummyService } from './services/dummy/program-dummy.service';
 import { SensorDummyService } from './services/dummy/sensor-dummy.service';
 import { SystemStatusDummyService } from "./services/dummy/system-status-dummy.service";
 import { OneWireService } from './services/onewire.service';
+import { SensorEditComponent } from './sensor-edit/sensor-edit.component';
+import { SensorConfigService } from './services/sensor-config.service';
 
 const appConfig: IAppConfig = {
-    get apiBase(): string { return "http://cherrypi:3000"; }
-    // get apiBase(): string { return "http://localhost:3000"; }
+    // get apiBase(): string { return "http://cherrypi:3000/api/"; }
+    get apiBase(): string { return "http://localhost:3000/api/"; }
 }
 
 const appRoutes: Routes = [
@@ -42,6 +44,7 @@ const appRoutes: Routes = [
     { path: 'settings', component: SettingsComponent },
     { path: 'programs', component: ProgramListComponent },
     { path: 'program-edit/:id', component: ProgramEditComponent },
+    { path: 'sensor-edit/:id', component: SensorEditComponent },
     { path: '**', redirectTo: '/home' }
 ];
 
@@ -56,7 +59,8 @@ const appRoutes: Routes = [
         ProgramInfoComponent,
         PageTitleComponent,
         ProgramEditComponent,
-        SettingsComponent
+        SettingsComponent,
+        SensorEditComponent,
     ],
     imports: [
         BrowserModule,
@@ -73,6 +77,7 @@ const appRoutes: Routes = [
 
         { provide: INJECTABLES.ControlService, useClass: ControlService },
         { provide: INJECTABLES.SensorService, useClass: SensorService },
+        { provide: INJECTABLES.SensorConfigService, useClass: SensorConfigService },
         { provide: INJECTABLES.OneWireService, useClass: OneWireService },
         { provide: INJECTABLES.SystemStatusService, useClass: SystemStatusService },
         { provide: INJECTABLES.ProgramService, useClass: ProgramService },

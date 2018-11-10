@@ -19,7 +19,7 @@ export class SensorService implements ISensorService {
 
     public listSensors(): Observable<ISensor[]> {
         
-        return this.http.get(this.appConfig.apiBase + "/api/sensor")
+        return this.http.get(this.appConfig.apiBase + "sensor")
 
         .map( (data: any): TemperatureSensor[] => {
 
@@ -33,8 +33,14 @@ export class SensorService implements ISensorService {
         });
     }
 
-    updateSensors(sensors: ISensor[]): Observable<boolean> {
-        return this.http.put(this.appConfig.apiBase + "/api/sensor/", { sensors: sensors })
+    public getSensor(id: string): Observable<ISensor> {
+        
+        return this.http.get(this.appConfig.apiBase + `sensor/${id}`)
+        .map( (data: any): TemperatureSensor => new TemperatureSensor(data));
+    }
+
+    updateSensor(sensor: ISensor): Observable<boolean> {
+        return this.http.post(this.appConfig.apiBase + `sensor/${sensor.id}`, sensor)
         .map( (data: any) => true );
     }
 }

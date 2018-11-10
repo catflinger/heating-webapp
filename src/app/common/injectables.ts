@@ -20,6 +20,7 @@ export let INJECTABLES = {
     ControlService: new InjectionToken<IControlService>("ControlService"),
     ProgramService: new InjectionToken<IProgramService>("ProgramService"),
     ProgramConfigService: new InjectionToken<IProgramConfigService>("ProgramConfigService"),
+    SensorConfigService: new InjectionToken<ISensorService>("SensorConfigService"),
     SensorService: new InjectionToken<ISensorService>("SensorService"),
     OneWireService: new InjectionToken<ISensorService>("OneWireService"),
     SlotsPerDay: new InjectionToken<number>("SlotsPerDay"),
@@ -40,9 +41,18 @@ export interface IControlService {
     clearOverride(): Observable<boolean>;
 }
 
+// this interface is for reading the current sesnor values
 export interface ISensorService {
     listSensors(): Observable<ISensor[]>;
-    updateSensors(sensors: ISensor[]): Observable<boolean>;
+    getSensor(id: string): Observable<ISensor>;
+}
+
+// this interface is for adding and removing sensors from the heating system
+export interface ISensorConfigService {
+    listSensors(): Observable<ISensor[]>;
+    getSensor(id: string): Observable<ISensor>;
+    updateSensor(sensor: ISensor): Observable<boolean>;
+    removeSensor(sensor: string): Observable<boolean>;
 }
 
 export interface IProgramService {

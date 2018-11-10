@@ -28,7 +28,7 @@ export class SystemStatusService implements ISystemStatusService {
             this.bSubject = <BehaviorSubject<SystemStatus>>new BehaviorSubject(null);
         }
 
-        this.http.get(this.appConfig.apiBase + "/api/status")
+        this.http.get(this.appConfig.apiBase + "status")
         .map((data) => {
             console.log("SUMMARY API RESPONSE:" + JSON.stringify(data));
             return new SystemStatus(data)

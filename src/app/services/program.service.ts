@@ -13,7 +13,7 @@ export class ProgramService implements IProgramService {
     }
 
     public listPrograms(): Observable<Program[]> {
-        return this.http.get(this.appConfig.apiBase + "/api/program")
+        return this.http.get(this.appConfig.apiBase + "program")
         .map( (data: any): Program[] => {
 
             const result: Program[] = [];
@@ -26,20 +26,20 @@ export class ProgramService implements IProgramService {
        
     public getProgram(id: string): Observable<Program> {
         return this.http
-        .get(this.appConfig.apiBase + `/api/program/${id}`)
+        .get(this.appConfig.apiBase + `program/${id}`)
         .map((data: any): Program => new Program(data));
     }
 
     public saveProgram(program: Program): Observable<any> {
         if (program.id) {
-            return this.http.post<Program>(this.appConfig.apiBase + `/api/program/${program.id}`, program);
+            return this.http.post<Program>(this.appConfig.apiBase + `program/${program.id}`, program);
         } else {
-            return this.http.put<Program>(this.appConfig.apiBase + "/api/program", program);
+            return this.http.put<Program>(this.appConfig.apiBase + "program", program);
         }
     }
 
     public deleteProgram(id: string): Observable<any> {
 
-        return this.http.delete(this.appConfig.apiBase + `/api/program/${id}`);
+        return this.http.delete(this.appConfig.apiBase + `program/${id}`);
     }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { IControlService, ISystemStatusService, slotsPerHour, ISensorService, ISensor } from "../common/injectables";
 import { INJECTABLES } from "../common/injectables";
 import { SystemStatus } from '../common/system-status';
+import { List } from 'linqts';
 
 @Component({
     selector: 'app-home',
@@ -11,7 +12,8 @@ import { SystemStatus } from '../common/system-status';
 export class HomeComponent implements OnInit {
     private successMessage: string;
     private status: SystemStatus;
-    private sensors: ISensor[] = [];
+    private hotWaterSensor: ISensor;
+    private bedroomSensor: ISensor;
 
     constructor(
         @Inject(INJECTABLES.SystemStatusService) private statusService: ISystemStatusService,
@@ -25,7 +27,10 @@ export class HomeComponent implements OnInit {
 
         this.sensorService.listSensors()
         .catch((error) => null)
-        .subscribe((s: ISensor[]) => this.sensors = s);
+        .subscribe((s: ISensor[]) => {
+            this.hotWaterSensor = s.find(s => s.role === "hw");
+            this.bedroomSensor = s.find(s => s.role === "bedroom");
+            });
     }
 
     private clearMessage(): void {

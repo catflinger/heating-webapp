@@ -14,12 +14,12 @@ export class ProgramConfigService implements IProgramConfigService {
     }
 
     public setProgramConfig(config: IProgramConfig): Observable<any> {
-        return this.http.put(this.appConfig.apiBase + "/api/program-config", config);
+        return this.http.put(this.appConfig.apiBase + "program-config", config);
     }
     
     public getProgramConfig(): Observable<IProgramConfig> {
         
-        return this.http.get(this.appConfig.apiBase + "/api/program-config")
+        return this.http.get(this.appConfig.apiBase + "program-config")
 
         .map( (data: any): IProgramConfig => {
 

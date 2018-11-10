@@ -1,0 +1,36 @@
+<app-page-title [title]="'Configure sensor'"></app-page-title>
+
+<div class="container">
+    <div class="row">
+        <div class="col-auto">
+            <div class="content alert alert-failure" *ngIf="statusMessage">{{statusMessage}}
+                <button type="button" class="btn btn-primary btn-success mt-1" (click)="close()">OK</button>
+            </div>
+        </div>
+    </div>
+    <form class="form" [formGroup]="form" (ngSubmit)="onFormSubmit()" *ngIf="form">
+        <fieldset>
+            <div class="form-group row">
+                <label for="inputId" class="col-sm-4 col-form-label">Sensor ID</label>
+                <input type="text" id="inputId" formControlName="id">
+            </div>
+            <div class="form-group row">
+                <label for="inputDescription" class="col-sm-4 col-form-label">Description</label>
+                <input type="text" id="inputDescription" placeholder="descriptive name" formControlName="description">
+            </div>
+
+            <div class="form-group row">
+                    <label for="inputRole" class="col-sm-4 col-form-label">Role</label>
+                    <input type="text" id="inputRole" placeholder="role for sensor" formControlName="role">
+                </div>
+    
+                <div class="form-group row">
+                <div class="col">
+                    <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="onSave()">Submit</button>
+                    <button type="button" class="btn btn-default" (click)="close()">Cancel</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>

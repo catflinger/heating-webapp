@@ -9,6 +9,9 @@ import { TemperatureSensor } from '../../common/temperature-sensor';
 
 @Injectable()
 export class SensorDummyService implements ISensorService {
+    updateSensor(sensor: ISensor): Observable<boolean> {
+        throw new Error("Method not implemented.");
+    }
     
     updateSensors(sensors: ISensor[]): Observable<boolean> {
         throw new Error("Method not implemented.");

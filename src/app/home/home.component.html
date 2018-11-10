@@ -34,9 +34,14 @@
         </div>
     </div>
 
-    <div class="row" *ngFor="let sensor of sensors">
-        <div class="col-auto">{{ sensor.description}}</div>
-        <div class="col-auto">{{ sensor.value | number:'1.0-0' }}</div>
+    <div class="row" *ngIf="hotWaterSensor">
+        <div class="col-auto">hot water temperature</div>
+        <div class="col-auto">{{ hotWaterSensor.value | number:'1.0-0' }}</div>
+    </div>
+
+    <div class="row" *ngIf="bedroomSensor">
+        <div class="col-auto">bedroom temperature</div>
+        <div class="col-auto">{{ bedroomSensor.value | number:'1.0-0' }}</div>
     </div>
 
 </div>

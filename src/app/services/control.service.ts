@@ -14,14 +14,14 @@ export class ControlService implements IControlService {
 
     public setOverride(duration: number): Observable<boolean> {
         return this.http
-            .put(this.appConfig.apiBase + "/api/override", { duration })
+            .put(this.appConfig.apiBase + "override", { duration })
             .map(result => true)
             .catch(error => Observable.from<boolean>([false]));
     }
 
     public clearOverride(): Observable<boolean> {
         return this.http
-            .delete(this.appConfig.apiBase + "/api/override")
+            .delete(this.appConfig.apiBase + "override")
             .map(result => true)
             .catch(error => Observable.from<boolean>([false]));
     }

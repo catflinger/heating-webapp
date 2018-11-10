@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { SystemStatus } from "../common/system-status";
 import { INJECTABLES, ISystemStatusService, ISensorService, ISensor, minutesPerSlot } from "../common/injectables";
+import { List } from 'linqts';
 
 @Component({
     selector: 'app-summary-info',
@@ -42,7 +43,10 @@ export class SummaryInfoComponent implements OnInit {
         this.sensorService.listSensors()
             .subscribe(
                 (sensors) => {
-                    this.sensors = sensors;
+                    this.sensors = new List<ISensor>(sensors)
+                        .Where(s => s.description != "unused")
+                        .OrderBy(s => s.description)
+                        .ToArray();
                 },
                 (error) => {
                     this.successMessage = "Failed to get the system status info: " + error;

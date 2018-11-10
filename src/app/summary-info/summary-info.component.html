@@ -41,14 +41,17 @@
             <h3>Devices</h3>
         </div>
     </div>
+
     <div class="row">
         <div class="col-sm-3">boiler</div>
         <div class="col-sm-9">{{status.device.boiler | onOff }}</div>
     </div>
+
     <div class="row">
         <div class="col-sm-3">heating pump</div>
         <div class="col-sm-9">{{status.device.chPump | onOff }}</div>
     </div>
+
     <div class="row">
         <div class="col-sm-3">hot water pump</div>
         <div class="col-sm-9">{{status.device.hwPump | onOff }}</div>
@@ -59,38 +62,56 @@
             <h3>Environment</h3>
         </div>
     </div>
-    <div class="row" *ngFor="let sensor of sensors">
-        <div class="col-sm-3">{{ sensor.description}}</div>
-        <div class="col-sm-9">{{ sensor.value | number:'1.0-0' }}</div>
-    </div>
+
+            <table class="table">
+                <thead>
+                    <th>Sensor</th>
+                    <th>Role</th>
+                    <th>Reading</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let sensor of sensors">
+                        <td>{{ sensor.description }}</td>
+                        <td>{{ sensor.role }}</td>
+                        <td>{{ sensor.value | number:'1.0-0' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
     <div class="row">
         <div class="col-sm-12">
             <h3>Program</h3>
             <p>{{status.activeProgram.name}}</p>
         </div>
     </div>
+
     <div class="row">
         <div class="col">
             <app-program-chart id="activeProgram" [program]="status.activeProgram" [overrides]="status.overrides" (click)="editProgram(status.activeProgram.id)"></app-program-chart>
         </div>
     </div>
+
     <div class="row">
         <div class="col-sm-3">Hot water min</div>
         <div class="col-sm-9">{{status.activeProgram.minHWTemp | number:'1.0-0' }}</div>
     </div>
+
     <div class="row">
         <div class="col-sm-3">Hot water max</div>
         <div class="col-sm-9">{{status.activeProgram.maxHWTemp  | number:'1.0-0'}}</div>
     </div>
+
     <!-- <div class="row">
         <div class="col-sm-12"><button class="btn btn-primary mt-1" (click)="onRefresh()">Refresh</button></div>
     </div> -->
     <div class="row mt-5">
         <div class="col-sm-12"><span class="feint">System time: {{status.serverTime}}</span></div>
     </div>
+
     <div class="row">
         <div class="col-sm-12"><span class="feint">Slot number: {{status.currentSlot | number:'1.0-0'}}</span></div>
     </div>
+
     <div class="row">
         <div class="col-sm-12"><span class="feint">Slots per hour: {{status.serverSlotsPerDay / 24 | number:'1.0-0'}}</span></div>
     </div>

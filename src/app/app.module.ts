@@ -33,8 +33,8 @@ import { SensorEditComponent } from './sensor-edit/sensor-edit.component';
 import { SensorConfigService } from './services/sensor-config.service';
 
 const appConfig: IAppConfig = {
-    // get apiBase(): string { return "http://cherrypi:3000/api/"; }
-    get apiBase(): string { return "http://localhost:3000/api/"; }
+    get apiBase(): string { return "http://cherrypi:3000/api/"; }
+    // get apiBase(): string { return "http://localhost:3000/api/"; }
 }
 
 const appRoutes: Routes = [

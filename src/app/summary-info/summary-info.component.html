@@ -3,6 +3,13 @@
 <app-page-title [title]="'System Status'"></app-page-title>
 
 <div class="container-fluid" *ngIf="status">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <button class="btn" (click)="refresh()">Refresh</button>
+        </div>
+    </div>
+    
     <div class="row">
         <div class="col">
             <h3>Heating</h3>
@@ -115,4 +122,5 @@
     <div class="row">
         <div class="col-sm-12"><span class="feint">Slots per hour: {{status.serverSlotsPerDay / 24 | number:'1.0-0'}}</span></div>
     </div>
+
 </div>

@@ -23,7 +23,19 @@ export class SummaryInfoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.refresh();
+        this.statusService.getStatus().subscribe((s) => this.status = s);
+
+        this.sensorService.listSensors()
+        .subscribe(
+            (sensors) => {
+                this.sensors = new List<ISensor>(sensors)
+                    .OrderBy(s => s.description)
+                    .ToArray();
+            },
+            (error) => {
+                this.successMessage = "Failed to get the system status info: " + error;
+            }
+        );
     }
 
     clearMessage(): void {
@@ -31,36 +43,11 @@ export class SummaryInfoComponent implements OnInit {
     }
 
     refresh(): void {
-        this.statusService.getStatus()
-            .subscribe(
-                (status) => {
-                    this.status = status;
-                },
-                (error) => {
-                    this.successMessage = "Failed to get the system status info: " + error;
-                }
-            );
-        this.sensorService.listSensors()
-            .subscribe(
-                (sensors) => {
-                    this.sensors = new List<ISensor>(sensors)
-                        .Where(s => s.description != "unused")
-                        .OrderBy(s => s.description)
-                        .ToArray();
-                },
-                (error) => {
-                    this.successMessage = "Failed to get the system status info: " + error;
-                }
-            );
+        this.statusService.refresh();
+        this.sensorService.refresh();
     }
 
     private editProgram(id: string) {
         this.router.navigate(["program-edit", id]);
-    }
-
-    onRefresh(): void {
-        console.log("clicked refresh buttom");
-        this.status = null;
-        this.statusService.refresh();
     }
 }

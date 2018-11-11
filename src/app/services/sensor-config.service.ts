@@ -27,7 +27,7 @@ export class SensorConfigService implements ISensorConfigService {
 
         .map( (data: any): TemperatureSensor[] => {
 
-            console.log(JSON.stringify(data));
+            // console.log(JSON.stringify(data));
 
             const result: TemperatureSensor[] = [];
             data.sensors.forEach((s: any) => {

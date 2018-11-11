@@ -44,7 +44,7 @@ export interface IControlService {
 // this interface is for reading the current sesnor values
 export interface ISensorService {
     listSensors(): Observable<ISensor[]>;
-    getSensor(id: string): Observable<ISensor>;
+    refresh(): void;
 }
 
 // this interface is for adding and removing sensors from the heating system

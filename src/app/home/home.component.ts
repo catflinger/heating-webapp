@@ -21,9 +21,7 @@ export class HomeComponent implements OnInit {
         @Inject(INJECTABLES.SensorService) private sensorService: ISensorService) { }
 
     ngOnInit() {
-        this.statusService.getStatus()
-        .catch((error) => null)
-        .subscribe((s: SystemStatus) => this.status = s);
+        this.statusService.getStatus().subscribe((s) => this.status = s);
 
         this.sensorService.listSensors()
         .catch((error) => null)
@@ -40,13 +38,14 @@ export class HomeComponent implements OnInit {
     private setOverride(hours: number): void {
         this.successMessage = null;
 
-        this.controlService.setOverride(hours * slotsPerHour)
+        this.controlService.setOverride(Math.floor(hours * slotsPerHour))
             .subscribe(
             (result) => {
                 this.successMessage = result ? "Heating boost set." : "Failed to set the heating override";
+                this.statusService.refresh();
             },
             (error) => {
-                console.log("Error: " + error);
+                // console.log("Error: " + error);
                 this.successMessage = "Failed to set the heating override: " + error;
             }
             );
@@ -61,9 +60,10 @@ export class HomeComponent implements OnInit {
             .subscribe(
             (result) => {
                 this.successMessage = result ? "Heating overrides cleared." : "Failed to clear the heating override";
+                this.statusService.refresh();
             },
             (error) => {
-                console.log("Error: " + error);
+                // console.log("Error: " + error);
                 this.successMessage = "Failed to clear the heating override: " + error;
             }
             );

@@ -15,8 +15,10 @@ export class SystemStatusService implements ISystemStatusService {
     constructor(
         private http: HttpClient, 
         @Inject(INJECTABLES.AppConfig) private appConfig: IAppConfig) {
-
-        this.refresh();
+            // default to a value of null for the initial SystemStatus reading
+            this.bSubject = <BehaviorSubject<SystemStatus>>new BehaviorSubject(null);
+            this.refresh();
+            setInterval(() => this.refresh(), 60000);
     }
 
     public getStatus(): Observable<SystemStatus> {
@@ -24,16 +26,15 @@ export class SystemStatusService implements ISystemStatusService {
     }
     
     public refresh(): void {
-        if (!this.bSubject) {
-            this.bSubject = <BehaviorSubject<SystemStatus>>new BehaviorSubject(null);
-        }
 
         this.http.get(this.appConfig.apiBase + "status")
         .map((data) => {
-            console.log("SUMMARY API RESPONSE:" + JSON.stringify(data));
+            // console.log("SUMMARY API RESPONSE:" + JSON.stringify(data));
             return new SystemStatus(data)
-        })
-        .subscribe((s) => this.bSubject.next(s));
-    }
+        }).subscribe((s) => {
+            this.bSubject.next(s);
+        }
+        );
 
+    }
 }

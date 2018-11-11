@@ -11,7 +11,7 @@ export class OneWireService implements IOneWireService {
     getAvailableDevices(): Observable<string[]> {
         return this.http.get(this.appConfig.apiBase + "onewire")
             .map( (data: any): string[] => {
-            console.log(JSON.stringify(data));
+            // console.log(JSON.stringify(data));
             return data.devices;
         });
     }

@@ -28,7 +28,7 @@ export class SettingsComponent implements OnInit {
         const deviceStream: Observable<string[]> = this.oneWireServcie.getAvailableDevices();
         const sensorStream: Observable<ISensor[]> = this.sensorService.listSensors();
 
-        Observable.forkJoin(deviceStream, sensorStream).subscribe((results: [string[], [ISensor]]) => {
+        Observable.combineLatest(deviceStream, sensorStream).subscribe((results: [string[], [ISensor]]) => {
             this.devices = new List<string>(results[0]);
             this.configuredSensors = new List<ISensor>(results[1]);
 

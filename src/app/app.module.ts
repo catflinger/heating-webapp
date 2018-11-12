@@ -23,18 +23,28 @@ import { ProgramService } from './services/program.service';
 import { ProgramConfigService } from './services/program-config.service';
 import { SystemStatusService } from "./services/system-status.service";
 
-import { ControlDummyService } from "./services/dummy/control-dummy.service";
-import { ProgramConfigDummyService } from './services/dummy/program-config-dummy.service';
-import { ProgramDummyService } from './services/dummy/program-dummy.service';
-import { SensorDummyService } from './services/dummy/sensor-dummy.service';
-import { SystemStatusDummyService } from "./services/dummy/system-status-dummy.service";
+// import { ControlDummyService } from "./services/dummy/control-dummy.service";
+// import { ProgramConfigDummyService } from './services/dummy/program-config-dummy.service';
+// import { ProgramDummyService } from './services/dummy/program-dummy.service';
+// import { SensorDummyService } from './services/dummy/sensor-dummy.service';
+// import { SystemStatusDummyService } from "./services/dummy/system-status-dummy.service";
+
 import { OneWireService } from './services/onewire.service';
 import { SensorEditComponent } from './sensor-edit/sensor-edit.component';
 import { SensorConfigService } from './services/sensor-config.service';
 
 const appConfig: IAppConfig = {
-    get apiBase(): string { return "http://cherrypi:3000/api/"; }
-    // get apiBase(): string { return "http://localhost:3000/api/"; }
+    
+    get apiBase(): string {
+        let result: string;
+    
+        if (process.env.NODE_ENV === "production") {
+            result = "http://cherrypi:3000/api/"
+        } else {
+            result = "http://localhost:3000/api/"
+        }
+        return result;
+    }
 }
 
 const appRoutes: Routes = [

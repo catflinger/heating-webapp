@@ -32,18 +32,14 @@ import { SystemStatusService } from "./services/system-status.service";
 import { OneWireService } from './services/onewire.service';
 import { SensorEditComponent } from './sensor-edit/sensor-edit.component';
 import { SensorConfigService } from './services/sensor-config.service';
+import { environment } from '../environments/environment.prod';
 
 const appConfig: IAppConfig = {
     
     get apiBase(): string {
-        let result: string;
-    
-        if (process.env.NODE_ENV === "production") {
-            result = "http://cherrypi:3000/api/"
-        } else {
-            result = "http://localhost:3000/api/"
-        }
-        return result;
+        return environment.apiEndpoint;
+        // return "http://cherrypi:3000/api/"
+        //return = "http://localhost:3000/api/"
     }
 }
 

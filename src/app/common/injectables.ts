@@ -72,10 +72,16 @@ export interface IAppConfig {
     apiBase: string;
 }
 
+export interface IDatedProgram {
+    programId: string;
+    activationDate: Date;
+}
+
 export interface IProgramConfig {
     weekdayProgramId: string;
     saturdayProgramId: string;
     sundayProgramId: string;
+    datedPrograms: IDatedProgram[],
     clone(): IProgramConfig;
 }
 

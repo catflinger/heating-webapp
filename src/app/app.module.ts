@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -33,13 +34,14 @@ import { OneWireService } from './services/onewire.service';
 import { SensorEditComponent } from './sensor-edit/sensor-edit.component';
 import { SensorConfigService } from './services/sensor-config.service';
 import { environment } from '../environments/environment.prod';
+import { MatDialogModule, MatFormField, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { ProgramDateDialogComponent } from './program-date-dialog/program-date-dialog.component';
 
 const appConfig: IAppConfig = {
     
     get apiBase(): string {
-        return environment.apiEndpoint;
-        // return "http://cherrypi:3000/api/"
-        //return = "http://localhost:3000/api/"
+        //return "http://localhost:3000/api/";
+        return "http://cherrypi/api/";
     }
 }
 
@@ -67,11 +69,18 @@ const appRoutes: Routes = [
         ProgramEditComponent,
         SettingsComponent,
         SensorEditComponent,
+        ProgramDateDialogComponent,
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
         RouterModule.forRoot(appRoutes, { useHash: true })
     ],
     providers: [
@@ -91,6 +100,9 @@ const appRoutes: Routes = [
 
         { provide: INJECTABLES.SlotsPerDay, useValue: 10 },
         { provide: INJECTABLES.AppConfig, useValue: appConfig },
+    ],
+    entryComponents: [
+        ProgramDateDialogComponent
     ],
     bootstrap: [AppComponent]
 })

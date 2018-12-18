@@ -31,7 +31,8 @@
     "zone.js": "^0.8.19",
     "uuid": "^3.2.1",
     "popper.js": "^1.12.9",
-    "linqts": "^1.12.2"
+    "linqts": "^1.12.2",
+    "moment": "2.23.0"
   },
   "devDependencies": {
     "@angular/cli": "1.6.7",

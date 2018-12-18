@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ProgramMode, IAppConfig, INJECTABLES, IProgramConfigService, IProgramConfig } from '../common/injectables';
 import { Program } from '../common/program';
 import { ProgramConfig } from '../common/program-config';
+import { DatedProgram } from '../common/dated-program';
 
 @Injectable()
 export class ProgramConfigService implements IProgramConfigService {
@@ -28,6 +29,10 @@ export class ProgramConfigService implements IProgramConfigService {
             result.weekdayProgramId = data.weekdayProgramId;
             result.saturdayProgramId = data.saturdayProgramId;
             result.sundayProgramId = data.sundayProgramId;
+
+            data.datedPrograms.forEach((dp: any) => {
+                result.datedPrograms.push(new DatedProgram(dp.programId, dp.activationDate));
+            });
     
             return result;
         });
